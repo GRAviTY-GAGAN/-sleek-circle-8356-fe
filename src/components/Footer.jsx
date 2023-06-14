@@ -18,6 +18,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
+import GoogleAndApp from "../assets/googleandappstorebtns.png";
+import { NavLink } from "react-router-dom";
 
 // import AppStoreBadge from "@/components/AppStoreBadge";
 // import PlayStoreBadge from "@/components/PlayStoreBadge";
@@ -68,6 +70,7 @@ export default function Footer() {
             <Link>Blog</Link>
             <Link>Careers</Link>
             <Link>Contact Us</Link>
+            <NavLink to={"/adminLogin"}>Admin</NavLink>
           </Stack>
 
           <Stack align={"flex-start"}>
@@ -89,6 +92,9 @@ export default function Footer() {
             <ListHeader>Install App</ListHeader>
             {/* <AppStoreBadge />
             <PlayStoreBadge /> */}
+            <Box>
+              <img src={GoogleAndApp} alt="" />
+            </Box>
           </Stack>
         </SimpleGrid>
       </Container>
@@ -107,7 +113,7 @@ export default function Footer() {
           justify={{ md: "space-between" }}
           align={{ md: "center" }}
         >
-          <Text>© 2022 Chakra Templates. All rights reserved</Text>
+          <Text>© 2023 RecipeFit. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
             <SocialButton label={"Twitter"}>
               <FaTwitter />
