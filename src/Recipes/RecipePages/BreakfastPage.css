@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* width: 100vw; */
+    /* width: 100% */
+    box-sizing: border-box;
+}
+.breakfast_flex{
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid black; */
+}
+.breakfast_sidebar{
+    width: 20%;
+    margin: 40px 0px 0 0;
+    padding-right: 30px;
+    border-right: 1px solid black;
+}
+.breakfast_List{
+    width: 78%;
+    margin-top: 40px;
+    border: 1px solid black;
+}
+.breakfast_p{
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+#breakfast_input{
+    width: 40%;
+    font-size: 1.1rem;
+    padding: 10px 10px 10px 55px;
+    /* height: 45px; */
+    border-radius: 10px;
+    margin-top: 10px;
+    color: black;
+}
+.breakfast_search{
+    position: absolute;
+    width: 1.6%;
+    height: 8%;
+    margin: 2.3% 0 0 31%;
+    /* background-color: green; */
+    color: gray;
+}
+.breakfast_image{
+    /* position: absolute; */
+    /* top: 0px;
+    left: 0px; */
+    height: 10%;
+    width: 20%;
+    margin: auto;
+    object-fit: contain;
+    transform: none;
+    transition: all 1.4s ease 0s;
+}
+.banner{
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    background-image: url("https://www.npd.com/wp-content/uploads/2021/05/food-consumption-banner-1440x480.jpeg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    position: relative;
+    /* https://www.shutterstock.com/image-photo/assorted-indian-chicken-dishes-nonveg-260nw-2135259055.jpg */
+}
+@media screen and (min-width: 795px) and (max-width: 1075px) {
+.breakfast_sidebar{
+  width: 30%;
+}
+.breakfast_List{
+  width: 70%;
+}
+.breakfast_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+}
+@media screen and (max-width: 795px) {
+.breakfast_sidebar{
+  width: 30%;
+}
+.breakfast_List{
+  width: 70%;
+}
+.breakfast_grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 15px;
+}
+}
