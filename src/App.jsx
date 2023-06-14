@@ -31,6 +31,7 @@ function App() {
     if (storeAdmin) {
       navigate("/admin");
     }
+    //
   }, [storeAdmin]);
 
   return (
