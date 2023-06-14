@@ -14,10 +14,11 @@ import AdminNavbar from "./components/Admin/AdminNavbar";
 import AdminRecipes from "./Pages/Admin/AdminRecipes";
 import AdminPrivateRoute from "./components/Admin/AdminPrivateRoute";
 import { verifyToken } from "./Redux/Role/actionTypes";
+import { BreakfastPage } from "./Recipes/RecipePages/BreakfastPage";
 
 function App() {
   const storeAdmin = useSelector((store) => {
-    return store.admin;
+    return store.adminReducer.admin;
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,8 +30,6 @@ function App() {
 
     if (storeAdmin) {
       navigate("/admin");
-    } else {
-      navigate("/home");
     }
   }, [storeAdmin]);
 
@@ -58,6 +57,7 @@ function App() {
             </AdminPrivateRoute>
           }
         />
+        <Route path="/recipe" element={<BreakfastPage />} />
       </Routes>
       <Footer />
     </>

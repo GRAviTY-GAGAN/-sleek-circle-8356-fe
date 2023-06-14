@@ -30,7 +30,7 @@ export default function SimpleCard() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const admin = useSelector((store) => store.admin);
+  const admin = useSelector((store) => store.adminReducer.admin);
 
   const url =
     process.env.NODE_ENV == "development"
