@@ -31,6 +31,7 @@ function App() {
     if (storeAdmin) {
       navigate("/admin");
     }
+    //
   }, [storeAdmin]);
 
   return (
@@ -59,7 +60,7 @@ function App() {
         />
         <Route path="/recipe" element={<BreakfastPage />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
