@@ -1,11 +1,3 @@
-// import React from "react";
-
-// const Footer = () => {
-//   return <div>Footer</div>;
-// };
-
-// export default Footer;
-
 import {
   Box,
   Container,
@@ -20,9 +12,6 @@ import {
 import { FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
 import GoogleAndApp from "../assets/googleandappstorebtns.png";
 import { NavLink } from "react-router-dom";
-
-// import AppStoreBadge from "@/components/AppStoreBadge";
-// import PlayStoreBadge from "@/components/PlayStoreBadge";
 
 const ListHeader = ({ children }) => {
   return (
@@ -92,7 +81,7 @@ export default function Footer() {
             <ListHeader>Install App</ListHeader>
             {/* <AppStoreBadge />
             <PlayStoreBadge /> */}
-            <Box>
+            <Box w={"40"} ml={"-2"} mt={"-5"}>
               <img src={GoogleAndApp} alt="" />
             </Box>
           </Stack>
