@@ -23,6 +23,7 @@ import {
 import "./AdminRecipes.css";
 import React, { useState } from "react";
 import axios from "axios";
+import AdminProductsComponent from "../../components/Admin/AdminProductsComponent";
 
 const AdminRecipes = () => {
   const url =
@@ -136,6 +137,10 @@ const AdminRecipes = () => {
           Add recipe
         </Button>
       </Flex>
+
+      {/* PRODUCTS START */}
+      <AdminProductsComponent />
+      {/* PRODUCTS END */}
       <Box>
         <Modal
           initialFocusRef={initialRef}
