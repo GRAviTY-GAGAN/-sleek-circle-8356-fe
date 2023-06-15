@@ -18,7 +18,7 @@ import { useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyToken } from "../../Redux/Role/actionTypes";
 
@@ -31,6 +31,9 @@ export default function SimpleCard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const admin = useSelector((store) => store.adminReducer.admin);
+  const location = useLocation();
+
+  // console.log(location, admin);
 
   const url =
     process.env.NODE_ENV == "development"
@@ -55,7 +58,7 @@ export default function SimpleCard() {
           if (res.data.status == "success") {
             localStorage.setItem("token", res.data.token);
             dispatch(verifyToken()).then(() => {
-              navigate("/admin");
+              navigate(location.state ? location.state : "/admin");
             });
           }
         })
@@ -148,7 +151,7 @@ export default function SimpleCard() {
                 }}
                 onClick={handleAdminLogin}
               >
-                Log in.
+                Sign in
               </Button>
             </Stack>
           </Stack>

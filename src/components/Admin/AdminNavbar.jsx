@@ -19,7 +19,9 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Logo from "../../assets/rlogo.png";
 import AdminAvatar from "../../assets/adminUserIcon.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ADMIN_TYPE } from "../../Redux/Role/actionTypes";
 
 const Links = [
   { name: "Home", path: "admin" },
@@ -28,6 +30,14 @@ const Links = [
 
 export default function AdminNavbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  function handleLogout() {
+    localStorage.setItem("token", "");
+    location.state = null;
+    dispatch({ type: ADMIN_TYPE, payload: false });
+  }
 
   return (
     <>
@@ -77,10 +87,10 @@ export default function AdminNavbar() {
                 <Avatar size={"md"} src={AdminAvatar} />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
+                <MenuItem onClick={handleLogout}>log out</MenuItem>
+                {/* <MenuItem>Link 2</MenuItem>
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem>Link 3</MenuItem> */}
               </MenuList>
             </Menu>
           </Flex>
