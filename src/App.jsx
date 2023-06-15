@@ -60,7 +60,7 @@ function App() {
         />
         <Route path="/recipe" element={<BreakfastPage />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

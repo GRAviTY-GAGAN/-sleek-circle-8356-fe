@@ -148,7 +148,7 @@ export default function SimpleCard() {
                 }}
                 onClick={handleAdminLogin}
               >
-                Sign in
+                Log in.
               </Button>
             </Stack>
           </Stack>
