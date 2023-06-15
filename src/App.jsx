@@ -8,13 +8,12 @@ import Footer from "./components/Footer";
 import AdminLogin from "./Pages/Admin/AdminLogin";
 import Admin from "./Pages/Admin/Admin";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import AdminNavbar from "./components/Admin/AdminNavbar";
 import AdminRecipes from "./Pages/Admin/AdminRecipes";
 import AdminPrivateRoute from "./components/Admin/AdminPrivateRoute";
 import { verifyToken } from "./Redux/Role/actionTypes";
-import { BreakfastPage } from "./Recipes/RecipePages/BreakfastPage";
+import { RecipePage } from "./Recipes/RecipePages/RecipePage";
 
 function App() {
   const storeAdmin = useSelector((store) => {
@@ -60,7 +59,7 @@ function App() {
             </AdminPrivateRoute>
           }
         />
-        <Route path="/recipe" element={<BreakfastPage />} />
+        <Route path="/recipe" element={<RecipePage />} />
       </Routes>
       <Footer />
     </>

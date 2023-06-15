@@ -26,7 +26,9 @@ const Navbar = () => {
           bg={"#fdfaf7"}
         >
           <Box>
-            <Image w={"50%"} src={RpLogo} />
+            <NavLink to={"/"}>
+              <Image w={"50%"} src={RpLogo} />
+            </NavLink>
           </Box>
 
           <Box
