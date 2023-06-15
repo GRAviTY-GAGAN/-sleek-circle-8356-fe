@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Login from "./Pages/Login";
@@ -22,14 +22,17 @@ function App() {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (!storeAdmin) {
       dispatch(verifyToken());
     }
 
+    // console.log(location, storeAdmin);
+
     if (storeAdmin) {
-      navigate("/admin");
+      navigate(location.state ? location.state : "/admin");
     }
   }, [storeAdmin]);
 
