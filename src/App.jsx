@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Login from "./Pages/Login";
@@ -8,13 +8,12 @@ import Footer from "./components/Footer";
 import AdminLogin from "./Pages/Admin/AdminLogin";
 import Admin from "./Pages/Admin/Admin";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import AdminNavbar from "./components/Admin/AdminNavbar";
 import AdminRecipes from "./Pages/Admin/AdminRecipes";
 import AdminPrivateRoute from "./components/Admin/AdminPrivateRoute";
 import { verifyToken } from "./Redux/Role/actionTypes";
-import { BreakfastPage } from "./Recipes/RecipePages/BreakfastPage";
+import { RecipePage } from "./Recipes/RecipePages/RecipePage";
 
 function App() {
   const storeAdmin = useSelector((store) => {
@@ -22,16 +21,18 @@ function App() {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (!storeAdmin) {
       dispatch(verifyToken());
     }
 
+    // console.log(location, storeAdmin);
+
     if (storeAdmin) {
-      navigate("/admin");
+      navigate(location.state ? location.state : "/admin");
     }
-    //
   }, [storeAdmin]);
 
   return (
@@ -58,9 +59,9 @@ function App() {
             </AdminPrivateRoute>
           }
         />
-        <Route path="/recipe" element={<BreakfastPage />} />
+        <Route path="/recipe" element={<RecipePage />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

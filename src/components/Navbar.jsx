@@ -92,7 +92,6 @@ export default function Simple() {
             </Menu>
           </Flex>
         </Flex>
-
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack
