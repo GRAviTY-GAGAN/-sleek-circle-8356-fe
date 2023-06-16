@@ -101,7 +101,7 @@ export const RecipeList = () => {
             <div className="grid">
               {recipes.length > 0 &&
                 recipes.splice(0,12).map((el, i) => {
-                  return <ProductCard key={el.id} {...el} />;
+                  return <ProductCard key={el.id} {...el} recipe={recipes}/>;
                 })}
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { RxCheckbox } from "react-icons/rx";
@@ -24,8 +24,12 @@ import {
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
+import { useParams } from "react-router-dom";
 
 export const SingleRecipePage = () => {
+  const {category, id} = useParams();
+  const [recipe, setRecipe] = useState(null)  
+
   return (
     <Container maxW={"4xl"}>
       <Box as={"header"}>
@@ -34,7 +38,7 @@ export const SingleRecipePage = () => {
           fontWeight={600}
           fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
         >
-          Automatic Watch
+          {recipe}
         </Heading>
         <Box display="flex" mt={"4"} fontSize={"1.2rem"}>
           <FaRegThumbsUp style={{ margin: "2.8px" }} /> Reviews | Prepare this
@@ -67,22 +71,6 @@ export const SingleRecipePage = () => {
           />
         </Flex>
         <Stack spacing={{ base: 6, md: 10 }}>
-          <Box as={"header"}>
-            <Heading
-              lineHeight={1.1}
-              fontWeight={600}
-              fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
-            >
-              Automatic Watch
-            </Heading>
-            <Text
-              color={useColorModeValue("gray.900", "gray.400")}
-              fontWeight={300}
-              fontSize={"2xl"}
-            >
-              $350.00 USD
-            </Text>
-          </Box>
 
           <Stack
             spacing={{ base: 4, sm: 6 }}
@@ -94,14 +82,6 @@ export const SingleRecipePage = () => {
             }
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
-              <Text
-                color={useColorModeValue("gray.500", "gray.400")}
-                fontSize={"2xl"}
-                fontWeight={"300"}
-              >
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore
-              </Text>
               <Text fontSize={"lg"}>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
                 aliquid amet at delectus doloribus dolorum expedita hic, ipsum
