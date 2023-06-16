@@ -1,115 +1,124 @@
 import {
   Box,
-  Button,
   Flex,
-  Heading,
+  Avatar,
+  HStack,
+  Link,
+  IconButton,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  useDisclosure,
+  useColorModeValue,
+  Stack,
   Image,
-  Input,
-  Text,
 } from "@chakra-ui/react";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { NavLink } from "react-router-dom";
 import RpLogo from "../assets/RpLogo.png";
-import { useState } from "react";
-import { BiSearch } from "react-icons/bi";
 
-const Navbar = () => {
-  const [nav, setNav] = useState(false);
+const Links = [
+  { name: "Home", path: "/" },
+  { name: "Login", path: "/login" },
+  { name: "Signup", path: "/signup" },
+  { name: "Course", path: "/course" },
+  { name: "User", path: "/user" },
+];
+
+export default function Simple() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box>
-      <Box display={"flex"} flexDirection={"column"} gap={".1rem"}>
-        <Box
-          display={"flex"}
-          gap={"2rem"}
-          justifyContent={"space-around"}
-          // border={"1px solid black"}
-          bg={"#fdfaf7"}
-        >
-          <Box>
-            <NavLink to={"/"}>
-              <Image w={"50%"} src={RpLogo} />
-            </NavLink>
-          </Box>
-
-          <Box
-            display={{ base: "none", sm: "none", md: "none", lg: "flex" }}
-            gap={"2rem"}
-            alignItems={"center"}
-          >
-            <Flex>
-              <Input w={"100%"} bg={"#ffffff"} />
-              <Button>
-                <BiSearch />
-              </Button>
-            </Flex>
-            <NavLink to={"/"}>
-              <Text fontWeight={"medium"} fontSize={"2xl"}>
-                Home
-              </Text>
-            </NavLink>
-            <NavLink to={"/login"}>
-              <Text fontWeight={"medium"} fontSize={"2xl"}>
-                Login
-              </Text>
-            </NavLink>
-            <NavLink to={"/signup"}>
-              <Text fontWeight={"medium"} fontSize={"2xl"}>
-                Signup
-              </Text>
-            </NavLink>
-            <NavLink to={"/course"}>
-              <Text fontWeight={"medium"} fontSize={"2xl"}>
-                Course
-              </Text>
-            </NavLink>
-            <NavLink to={"/user"}>
-              <Text fontWeight={"medium"} fontSize={"2xl"}>
-                User
-              </Text>
-            </NavLink>
-          </Box>
-          {/* mobile diisplay */}
-        </Box>
-        <Box
-          display={{ base: "flex", sm: "flex", md: "flex", lg: "none" }}
-          gap={"2rem"}
-          flexDirection={"column"}
-          alignItems={"center"}
-        >
-          <Flex>
-            <Input w={"100%"} bg={"#ffffff"} />
-            <Button>
-              <BiSearch />
-            </Button>
+    <>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+          <IconButton
+            size={"md"}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <HStack spacing={8} alignItems={"center"}>
+            <Box w={"11rem"}>
+              <Image src={RpLogo} />
+            </Box>
+            <HStack
+              as={"nav"}
+              spacing={4}
+              display={{ base: "none", md: "flex" }}
+            >
+              {Links.map((link) => (
+                <NavLink
+                  style={({ isActive }) => ({
+                    padding: "0.3rem",
+                    borderBottom: isActive
+                      ? "2px solid #2F855A"
+                      : "2px solid transparent",
+                  })}
+                  key={link.name}
+                  to={link.path}
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+            </HStack>
+          </HStack>
+          <Flex alignItems={"center"}>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rounded={"full"}
+                variant={"link"}
+                cursor={"pointer"}
+                minW={0}
+              >
+                <Avatar
+                  size={"sm"}
+                  src={
+                    "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                  }
+                />
+              </MenuButton>
+              <MenuList>
+                <MenuItem>Link 1</MenuItem>
+                <MenuItem>Link 2</MenuItem>
+                <MenuDivider />
+                <MenuItem>Link 3</MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
-          <NavLink to={"/"}>
-            <Text fontWeight={"medium"} fontSize={"2xl"}>
-              Home
-            </Text>
-          </NavLink>
-          <NavLink to={"/login"}>
-            <Text fontWeight={"medium"} fontSize={"2xl"}>
-              Login
-            </Text>
-          </NavLink>
-          <NavLink to={"/signup"}>
-            <Text fontWeight={"medium"} fontSize={"2xl"}>
-              Signup
-            </Text>
-          </NavLink>
-          <NavLink to={"/course"}>
-            <Text fontWeight={"medium"} fontSize={"2xl"}>
-              Course
-            </Text>
-          </NavLink>
-          <NavLink to={"/user"}>
-            <Text fontWeight={"medium"} fontSize={"2xl"}>
-              User
-            </Text>
-          </NavLink>
-        </Box>
+        </Flex>
+        {isOpen ? (
+          <Box pb={4} display={{ md: "none" }}>
+            <Stack
+              as={"nav"}
+              textAlign={"center"}
+              spacing={4}
+            >
+              {Links.map((link) => (
+                <NavLink
+                  style={({ isActive }) => ({
+                    padding: "0.3rem",
+                    borderBottom: isActive
+                      ? "2px solid #2F855A"
+                      : "2px solid transparent",
+                    w: ".2rem",
+                  })}
+                  key={link.name}
+                  onClick={isOpen ? onClose : onOpen}
+                  to={link.path}
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
       </Box>
-    </Box>
+    </>
   );
-};
-export default Navbar;
+}
