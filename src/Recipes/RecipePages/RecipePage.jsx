@@ -6,11 +6,11 @@ export const RecipePage = () => {
   return (
     <div>
       <div className="banner"></div>
-      <div className="breakfast_flex">
-        <div className="breakfast_sidebar" data-aos="zoom-out-right">
+      <div className="recipe_flex">
+        <div className="recipe_sidebar" data-aos="zoom-out-right">
           <RecipeSidebar />
         </div>
-        <div className="breakfast_List" data-aos="zoom-out-left">
+        <div className="recipe_List" data-aos="zoom-out-left">
           <RecipeList />
         </div>
       </div>
