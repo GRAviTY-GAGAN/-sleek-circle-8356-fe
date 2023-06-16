@@ -5,12 +5,12 @@ import { WarningTwoIcon } from "@chakra-ui/icons";
 import { Box, Heading, SkeletonText } from "@chakra-ui/react";
 import { recipeData } from "../../Redux/recipeReducer/action";
 import ProductCard from "../RecipePages/ProductCard";
-import "./RecipeList.css"
+import "./RecipeList.css";
 
 export const RecipeList = () => {
   const [query, setQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const recipes = useSelector(store => store.recipeReducer.recipes);
+  const recipes = useSelector((store) => store.recipeReducer.recipes);
   const loading = useSelector((store) => store.recipeReducer.isLoading);
   const skeleton = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   const dispatch = useDispatch();
@@ -31,9 +31,9 @@ export const RecipeList = () => {
     },
   };
 
-//   //Fetching Data
+  //   //Fetching Data
   useEffect(() => {
-    console.log("data", obj);
+    // console.log("data", obj);
     dispatch(recipeData(obj));
   }, [location.search]);
 
@@ -49,7 +49,7 @@ export const RecipeList = () => {
   }, [query]);
 
   return (
-    <div style={{textAlign: "left"}}>
+    <div style={{ textAlign: "left" }}>
       <div className="input">
         <input
           type="text"
@@ -58,13 +58,18 @@ export const RecipeList = () => {
           placeholder="Search 🔍"
           onChange={(e) => setQuery(e.target.value)}
         />
-      </div> 
+      </div>
 
       {loading ? (
         <div className="grid">
           {skeleton.map((el, i) => {
             return (
-              <Box padding="0" bg="white" borderRadius="5px">
+              <Box
+                key={i + Date.now()}
+                padding="0"
+                bg="white"
+                borderRadius="5px"
+              >
                 <SkeletonText
                   mt="4"
                   noOfLines={1}
@@ -83,12 +88,12 @@ export const RecipeList = () => {
         </div>
       ) : !loading && recipes.length ? (
         <div className="main">
-            <div className="grid">
-              {recipes.length > 0 &&
-                recipes.map((el, i) => {
-                  return <ProductCard key={el.id} {...el} />;
-                })}
-            </div>
+          <div className="grid">
+            {recipes.length > 0 &&
+              recipes.map((el, i) => {
+                return <ProductCard key={el._id} {...el} />;
+              })}
+          </div>
         </div>
       ) : (
         <Box textAlign="center" py={10} px={6}>

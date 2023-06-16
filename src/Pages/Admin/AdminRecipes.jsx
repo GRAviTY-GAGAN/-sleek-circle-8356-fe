@@ -23,6 +23,8 @@ import {
 import "./AdminRecipes.css";
 import React, { useState } from "react";
 import axios from "axios";
+import AdminProductsComponent from "../../components/Admin/AdminProductsComponent";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 const AdminRecipes = () => {
   const url =
@@ -50,6 +52,7 @@ const AdminRecipes = () => {
   const [review, setreview] = useState("");
   const [category, setcategory] = useState("");
   const [timeRequired, settimeRequired] = useState("");
+  const [show, setShow] = useState(false);
 
   const courses = ["Breakfast", "Lunch", "Dinner"];
   function handleAddRecipe() {
@@ -131,11 +134,43 @@ const AdminRecipes = () => {
 
   return (
     <div className="AdminRecipes__mainCont">
-      <Flex justify={"flex-end"} mt={6}>
-        <Button onClick={onOpen} colorScheme="teal" size="md">
-          Add recipe
-        </Button>
-      </Flex>
+      <div
+        style={{
+          position: "sticky",
+          top: "63px",
+          background: "white",
+          zIndex: 1,
+        }}
+      >
+        <Flex
+          justify={{ base: "space-between", md: "flex-end" }}
+          align={"center"}
+          w={"90%"}
+          m={"auto"}
+          pt={6}
+          bg={"white"}
+          pb={4}
+          zIndex={1}
+        >
+          <div className="AdminRecipes__SidebarHam">
+            <Button
+              onClick={() => setShow(!show)}
+              backgroundColor={"#edf2f7"}
+              fontSize={20}
+            >
+              <HamburgerIcon />
+            </Button>
+          </div>
+
+          <Button onClick={onOpen} colorScheme="teal" size="md">
+            Add recipe
+          </Button>
+        </Flex>
+      </div>
+
+      {/* PRODUCTS START */}
+      <AdminProductsComponent show={show} />
+      {/* PRODUCTS END */}
       <Box>
         <Modal
           initialFocusRef={initialRef}

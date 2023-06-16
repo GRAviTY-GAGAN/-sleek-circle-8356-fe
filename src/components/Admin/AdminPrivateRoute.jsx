@@ -5,7 +5,11 @@ import { Navigate, useLocation } from "react-router-dom";
 const AdminPrivateRoute = ({ children }) => {
   const admin = useSelector((store) => store.adminReducer.admin);
   const location = useLocation();
-  location.state = location.pathname;
+  // location.state = location.pathname;
+
+  location.pathname == "/adminRecipes"
+    ? (location.state = location.pathname + location.search)
+    : (location.state = location.pathname);
 
   // console.log(location, admin);
 

@@ -37,7 +37,13 @@ function App() {
 
   return (
     <>
-      {!storeAdmin ? <Navbar /> : <AdminNavbar />}
+      {!storeAdmin ? (
+        <Navbar />
+      ) : (
+        <div style={{ position: "sticky", top: "0px", zIndex: 2 }}>
+          <AdminNavbar />
+        </div>
+      )}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
