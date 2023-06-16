@@ -1,4 +1,11 @@
-import { Box, Checkbox, Flex, Heading, SkeletonText } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  Heading,
+  SkeletonText,
+} from "@chakra-ui/react";
 import axios from "axios";
 import "./AdminProductsComponent.css";
 import React, { useEffect, useState } from "react";
@@ -53,7 +60,7 @@ const AdminProductsComponent = ({ show }) => {
       .then((res) => {
         // console.log(res, "RECIPES");
         setRecipes(res.data.recipes);
-        setRecipesCount(res.data.recipesCount);
+        setRecipesCount(Math.ceil(res.data.recipesCount / 12));
       })
       .catch((err) => {
         console.log(err);
@@ -99,6 +106,7 @@ const AdminProductsComponent = ({ show }) => {
     <div>
       <div className="AdminProductsComponent__sidebarAndProducts">
         <div
+          style={{ zIndex: 1 }}
           className={`${
             show
               ? "AdminProductsComponent__sidebar shownav"
@@ -159,6 +167,37 @@ const AdminProductsComponent = ({ show }) => {
                 Dinner
               </Checkbox>
             </div>
+          </div>
+          <div className="AdminProductsComponent__SidebarPagination">
+            <div className="AdminProductsComponent__FieldName">Page</div>
+            <Flex justify={"space-between"}>
+              <Button
+                name="prev"
+                onClick={(e) => handlePageChange(e.target.name)}
+                isDisabled={pageNo == 1}
+                backgroundColor={"green.400"}
+                color={"white"}
+                _hover={{
+                  color: "black",
+                  background: "#edf2f7",
+                }}
+              >
+                Prev
+              </Button>
+              <Button
+                onClick={(e) => handlePageChange(e.target.name)}
+                name="next"
+                isDisabled={pageNo == recipesCount}
+                backgroundColor={"green.400"}
+                color={"white"}
+                _hover={{
+                  color: "black",
+                  background: "#edf2f7",
+                }}
+              >
+                Next
+              </Button>
+            </Flex>
           </div>
         </div>
         <div className="AdminProductsComponent__productsMainCont">

@@ -45,10 +45,20 @@
     gap: 1rem;
 }
 
+.AdminProductsComponent__SidebarPagination {
+    display: none;
+}
+
 @media screen and (max-width:500px) {
     /* .AdminProductsComponent__sidebarAndProducts {
         display: block;
     } */
+
+    .AdminProductsComponent__SidebarPagination {
+        display: block;
+    }
+
+
 
     .AdminProductsComponent__products {
         grid-template-columns: repeat(1, 1fr);
@@ -58,7 +68,7 @@
     }
 
     .AdminProductsComponent__sidebar {
-        position: absolute;
+        position: fixed;
         width: 50%;
         left: -200px;
 

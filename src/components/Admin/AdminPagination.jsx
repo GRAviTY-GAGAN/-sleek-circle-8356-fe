@@ -2,7 +2,7 @@ import { Button, Flex } from "@chakra-ui/react";
 import React from "react";
 
 const AdminPagination = ({ recipesCount, page, handlePageChange }) => {
-  recipesCount = Math.ceil(recipesCount / 12);
+  // recipesCount = Math.ceil(recipesCount / 12);
 
   function pageChange(e) {
     handlePageChange(e.target.name);

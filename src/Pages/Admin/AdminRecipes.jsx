@@ -134,27 +134,39 @@ const AdminRecipes = () => {
 
   return (
     <div className="AdminRecipes__mainCont">
-      <Flex
-        justify={{ base: "space-between", md: "flex-end" }}
-        align={"center"}
-        w={"90%"}
-        m={"auto"}
-        mt={6}
+      <div
+        style={{
+          position: "sticky",
+          top: "63px",
+          background: "white",
+          zIndex: 1,
+        }}
       >
-        <div className="AdminRecipes__SidebarHam">
-          <Button
-            onClick={() => setShow(!show)}
-            backgroundColor={"#edf2f7"}
-            fontSize={20}
-          >
-            <HamburgerIcon />
-          </Button>
-        </div>
+        <Flex
+          justify={{ base: "space-between", md: "flex-end" }}
+          align={"center"}
+          w={"90%"}
+          m={"auto"}
+          pt={6}
+          bg={"white"}
+          pb={4}
+          zIndex={1}
+        >
+          <div className="AdminRecipes__SidebarHam">
+            <Button
+              onClick={() => setShow(!show)}
+              backgroundColor={"#edf2f7"}
+              fontSize={20}
+            >
+              <HamburgerIcon />
+            </Button>
+          </div>
 
-        <Button onClick={onOpen} colorScheme="teal" size="md">
-          Add recipe
-        </Button>
-      </Flex>
+          <Button onClick={onOpen} colorScheme="teal" size="md">
+            Add recipe
+          </Button>
+        </Flex>
+      </div>
 
       {/* PRODUCTS START */}
       <AdminProductsComponent show={show} />
