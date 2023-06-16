@@ -79,8 +79,6 @@ export default function Footer() {
 
           <Stack align={"flex-start"}>
             <ListHeader>Install App</ListHeader>
-            {/* <AppStoreBadge />
-            <PlayStoreBadge /> */}
             <Box w={"40"} ml={"-2"} mt={"-5"}>
               <img src={GoogleAndApp} alt="" />
             </Box>

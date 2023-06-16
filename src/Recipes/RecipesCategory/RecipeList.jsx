@@ -6,21 +6,28 @@ import { Box, Heading, SkeletonText } from "@chakra-ui/react";
 import { recipeData } from "../../Redux/recipeReducer/action";
 import ProductCard from "../RecipePages/ProductCard";
 import "./RecipeList.css"
+import { Pagination } from "../RecipePages/Pagination";
 
 export const RecipeList = () => {
   const [query, setQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const recipes = useSelector(store => store.recipeReducer.recipes);
+  console.log(recipes.length)
   const loading = useSelector((store) => store.recipeReducer.isLoading);
   const skeleton = [1, 1, 1, 1, 1, 1, 1, 1, 1];
+  const initialPage = searchParams.get("page");
+  const [page, setPage] = useState(+initialPage || 1);
   const dispatch = useDispatch();
   const location = useLocation();
   let ref = useRef();
+  let pageLimit = Math.ceil(recipes.length/12);
 
   let obj = {
     params: {
       category: searchParams.getAll("category"),
       course: searchParams.getAll("course"),
+      _page: searchParams.get("page"),
+      _limit: 12
     },
   };
 
@@ -30,6 +37,14 @@ export const RecipeList = () => {
       q: query && query,
     },
   };
+
+  //Pagination
+  useEffect(() => {
+    let param = {
+      page,
+    };
+    setSearchParams(param);
+  }, [page]);
 
 //   //Fetching Data
   useEffect(() => {
@@ -64,7 +79,7 @@ export const RecipeList = () => {
         <div className="grid">
           {skeleton.map((el, i) => {
             return (
-              <Box padding="0" bg="white" borderRadius="5px">
+              <Box key={i} padding="0" bg="white" borderRadius="5px">
                 <SkeletonText
                   mt="4"
                   noOfLines={1}
@@ -85,7 +100,7 @@ export const RecipeList = () => {
         <div className="main">
             <div className="grid">
               {recipes.length > 0 &&
-                recipes.map((el, i) => {
+                recipes.splice(0,12).map((el, i) => {
                   return <ProductCard key={el.id} {...el} />;
                 })}
             </div>
@@ -98,6 +113,9 @@ export const RecipeList = () => {
           </Heading>
         </Box>
       )}
+      <Box>
+        <Pagination page={page} setPage={setPage} limit={pageLimit} />
+      </Box>
     </div>
   );
 };
