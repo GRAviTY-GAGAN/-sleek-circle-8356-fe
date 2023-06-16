@@ -5,5 +5,16 @@
 }
 
 .AdminRecipes__mainCont {
-    margin: 0 4rem;
+    /* margin: 0 4rem; */
+    min-height: 500px;
+}
+
+.AdminRecipes__SidebarHam {
+    display: none;
+}
+
+@media screen and (max-width:500px) {
+    .AdminRecipes__SidebarHam {
+        display: block;
+    }
 }

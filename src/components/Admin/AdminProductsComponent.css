@@ -1,0 +1,82 @@
+.AdminProductsComponent__sidebarAndProducts {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.AdminProductsComponent__sidebar {
+    width: 20%;
+    background-color: #edf2f7;
+    padding: 1rem;
+    border-radius: 5px;
+    height: fit-content;
+    transition: all 0.25s linear;
+}
+
+.AdminProductsComponent__FieldName {
+    padding-bottom: 0.5rem;
+    font-size: medium;
+    font-weight: 500;
+    padding-top: 1rem;
+}
+
+.AdminProductsComponent__SkeletonProducts {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.zero {
+    padding-top: 0
+}
+
+.AdminProductsComponent__productsMainCont {
+    width: 80%;
+    border-radius: 5px;
+    background-color: white;
+    padding: 1rem;
+    padding-top: 0;
+    margin: auto;
+}
+
+.AdminProductsComponent__products {
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+}
+
+@media screen and (max-width:500px) {
+    /* .AdminProductsComponent__sidebarAndProducts {
+        display: block;
+    } */
+
+    .AdminProductsComponent__products {
+        grid-template-columns: repeat(1, 1fr);
+        width: 90%;
+        margin: auto;
+        background-color: white;
+    }
+
+    .AdminProductsComponent__sidebar {
+        position: absolute;
+        width: 50%;
+        left: -200px;
+
+    }
+
+    .shownav {
+        left: 0;
+    }
+}
+
+@media screen and (min-width:501px) and (max-width:900px) {
+    .AdminProductsComponent__products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width:901px) and (max-width:1200px) {
+    .AdminProductsComponent__products {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
