@@ -39,8 +39,8 @@ function App() {
     <>
       {!storeAdmin ? <Navbar /> : <AdminNavbar />}
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route
           path="/admin"
           element={
