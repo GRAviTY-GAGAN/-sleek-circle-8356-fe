@@ -14,6 +14,7 @@ import AdminRecipes from "./Pages/Admin/AdminRecipes";
 import AdminPrivateRoute from "./components/Admin/AdminPrivateRoute";
 import { verifyToken } from "./Redux/Role/actionTypes";
 import { RecipePage } from "./Recipes/RecipePages/RecipePage";
+import { SingleRecipePage } from "./Recipes/RecipePages/SingleRecipePage";
 
 function App() {
   const storeAdmin = useSelector((store) => {
@@ -66,6 +67,7 @@ function App() {
           }
         />
         <Route path="/recipe" element={<RecipePage />} />
+        <Route path="/recipe/:id" element={<SingleRecipePage />} />
       </Routes>
       <Footer />
     </>

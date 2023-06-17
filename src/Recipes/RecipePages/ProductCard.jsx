@@ -4,8 +4,9 @@ import {BiFoodTag} from "react-icons/bi"
 import {FaRegThumbsUp} from "react-icons/fa"
 import {IoTime} from "react-icons/io5"
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
+import { Link } from "react-router-dom";
 
-function ProductCard({image, name, category, course, description, review, timeRequired}) {
+function ProductCard({image, name, category, course, description, review, timeRequired, recipe}) {
   const [liked, setLiked] = useState(false);
 
   return (
@@ -50,6 +51,7 @@ function ProductCard({image, name, category, course, description, review, timeRe
           <Box display="flex">
           {review} <FaRegThumbsUp style={{margin: "2.8px"}}/> | {" "} {timeRequired} <IoTime style={{margin: "6px 2px"}}/>
           </Box>
+          <Link to={`/recipe/${recipe.id}`}>
           <Flex
             p={1}
             mt={1}
@@ -63,6 +65,7 @@ function ProductCard({image, name, category, course, description, review, timeRe
               <BsHeart fontSize={'20px'} />
             )}
           </Flex>
+          </Link>
         </Box>
       </Box>
     </Box>
