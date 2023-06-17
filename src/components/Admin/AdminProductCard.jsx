@@ -13,10 +13,11 @@ function AdminProductCard({
   description,
   review,
   timeRequired,
+  timeRequire,
 }) {
   const [liked, setLiked] = useState(false);
 
-  console.log(timeRequired);
+  // console.log(timeRequired);
 
   return (
     <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -81,12 +82,11 @@ function AdminProductCard({
           alignItems="center"
           justifyContent="space-between"
         >
-          <Box display="flex">
+          <Box display="flex" flexWrap={"wrap"}>
             <Flex justify={"center"} align={"center"}>
-              {" "}
               <IoTime style={{ margin: "6px 2px" }} />
-              <Box> {timeRequired}</Box>
-            </Flex>{" "}
+              <Box> {timeRequired || timeRequire}</Box>
+            </Flex>
             &nbsp;|&nbsp;
             <Flex justify={"center"} align={"center"}>
               <Box>{review}</Box> <FaRegThumbsUp style={{ margin: "2.8px" }} />{" "}

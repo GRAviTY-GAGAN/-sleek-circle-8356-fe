@@ -8,14 +8,16 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import "./AdminProductsComponent.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ProductCard from "../../Recipes/RecipePages/ProductCard";
 import AdminProductCard from "./AdminProductCard";
-import { WarningTwoIcon } from "@chakra-ui/icons";
+import { CloseIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import { useSearchParams } from "react-router-dom";
 import AdminPagination from "./AdminPagination";
+import { useDispatch } from "react-redux";
+import { COURSE_COUNT } from "../../Redux/Role/actionTypes";
 
-const AdminProductsComponent = ({ show }) => {
+const AdminProductsComponent = ({ show, setShow }) => {
   const url =
     process.env.NODE_ENV == "development"
       ? import.meta.env.VITE_REACT_APP_LOCAL_URL
@@ -33,6 +35,10 @@ const AdminProductsComponent = ({ show }) => {
     searchParams.getAll("category") || []
   );
   const [course, setCourse] = useState(searchParams.getAll("course") || []);
+
+  const dispatch = useDispatch();
+  const limitReq = useRef(0);
+  // console.log(limitReq);
 
   // category.length > 0 ? (urlparams.category = category) : "";
 
@@ -58,9 +64,22 @@ const AdminProductsComponent = ({ show }) => {
         },
       })
       .then((res) => {
-        // console.log(res, "RECIPES");
+        console.log(res, "RECIPES");
+        if (res.data.recipes.length == 0 && limitReq.current < 3) {
+          limitReq.current = limitReq.current + 1;
+          setPageNo(1);
+        }
+        limitReq.current = 0;
         setRecipes(res.data.recipes);
         setRecipesCount(Math.ceil(res.data.recipesCount / 12));
+        dispatch({
+          type: COURSE_COUNT,
+          breakfastCount: res.data.breakfastCount,
+          lunchCount: res.data.lunchCount,
+          dinnerCount: res.data.dinnerCount,
+          startersCount: res.data.startersCount,
+          drinksCount: res.data.drinksCount,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -114,6 +133,14 @@ const AdminProductsComponent = ({ show }) => {
           }`}
         >
           <div>
+            <div
+              onClick={() => setShow(!show)}
+              className="AdminProductsComponent__SidebarCloseBTN"
+            >
+              <Flex justify={"flex-end"}>
+                <CloseIcon />
+              </Flex>
+            </div>
             <div className="AdminProductsComponent__FieldName zero">
               Category
             </div>
@@ -165,6 +192,24 @@ const AdminProductsComponent = ({ show }) => {
                 value="Dinner"
               >
                 Dinner
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox
+                isChecked={course.includes("Starters")}
+                onChange={(e) => handleCourseChange(e)}
+                value="Starters"
+              >
+                Starters
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox
+                isChecked={course.includes("Drinks")}
+                onChange={(e) => handleCourseChange(e)}
+                value="Drinks"
+              >
+                Drinks
               </Checkbox>
             </div>
           </div>
@@ -232,6 +277,7 @@ const AdminProductsComponent = ({ show }) => {
               <div className="AdminProductsComponent__products">
                 {recipes.length > 0 &&
                   recipes.map((el, i) => {
+                    // console.log(el, "ELEMEN");
                     return <AdminProductCard key={el._id} {...el} />;
                   })}
               </div>

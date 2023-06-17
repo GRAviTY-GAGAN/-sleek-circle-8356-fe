@@ -49,10 +49,18 @@
     display: none;
 }
 
+.AdminProductsComponent__SidebarCloseBTN {
+    display: none;
+}
+
 @media screen and (max-width:500px) {
     /* .AdminProductsComponent__sidebarAndProducts {
         display: block;
     } */
+
+    .AdminProductsComponent__SidebarCloseBTN {
+        display: block;
+    }
 
     .AdminProductsComponent__SidebarPagination {
         display: block;
@@ -71,11 +79,12 @@
         position: fixed;
         width: 50%;
         left: -200px;
-
+        top: 160px;
     }
 
     .shownav {
         left: 0;
+        top: 160px;
     }
 }
 

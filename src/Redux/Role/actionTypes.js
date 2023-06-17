@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const ADMIN_TYPE = "ADMIN_TYPE";
+export const COURSE_COUNT = "COURSE_COUNT";
 
 const url =
   process.env.NODE_ENV == "development"
