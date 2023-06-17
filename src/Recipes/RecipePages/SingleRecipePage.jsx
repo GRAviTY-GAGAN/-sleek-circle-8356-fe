@@ -173,15 +173,14 @@ export const SingleRecipePage = () => {
               </li>
               </Text>
             </Box>
-
-            <Grid columns={{base: 1, sm: 2, md: 3, lg: 4}}>
-            </Grid>
           </Stack>
 
         </Stack>
       </SimpleGrid>
     </Container>
+    <Container mt={"10"} maxW={"8xl"}>
       <GridContainer data={Protein} title={"High Protein Recipes"}/>
+    </Container>
     </div>
   );
 };

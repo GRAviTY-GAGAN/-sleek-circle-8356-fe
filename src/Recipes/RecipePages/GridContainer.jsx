@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { GridCard } from './GridCard';
 import "./GridContainer.css"
+import { Grid } from '@chakra-ui/react';
 
 export const GridContainer = ({data, title}) => {
   const [arr] = useState(data)
 
   return (
-    <div>
+    <div className='main_cont'>
       <div className='p_card'>
         <p>{title}</p>
       </div>
-      <div className='grid_card'>
+      <Grid className='grid_card'>
         {arr.length > 0 && arr.map((el,i)=> {
           return <GridCard key={i} {...el}/>
         })}
-        </div>
+        </Grid>
     </div>
   )
 }
