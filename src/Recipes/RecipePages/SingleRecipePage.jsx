@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { RxCheckbox } from "react-icons/rx";
@@ -26,32 +26,51 @@ import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
+const getData = (url) => {
+    return fetch(url).then((res) => res.json());
+  };
+
 export const SingleRecipePage = () => {
   const {category, id} = useParams();
-  const [recipe, setRecipe] = useState(null)  
+  const [recipe, setRecipe] = useState([])  
+
+//   const url = "https://thzv8b-8080.csb.app/recipes"
+  const fetchData = () => {
+    getData(`https://thzv8b-8080.csb.app/recipes/${[category]}/${id}`)
+      .then((res) => {
+        setRecipe(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
-    <Container maxW={"4xl"}>
+    <Container mt={"10"} maxW={"4xl"}>
       <Box as={"header"}>
         <Heading
           lineHeight={1.1}
           fontWeight={600}
+          ml={"-1"}
           fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
         >
-          {recipe}
+          {recipe?.name}
         </Heading>
         <Box display="flex" mt={"4"} fontSize={"1.2rem"}>
-          <FaRegThumbsUp style={{ margin: "2.8px" }} /> Reviews | Prepare this
-          delicious recipe in : <IoTime style={{ margin: "6px 2px" }} />
+          {recipe?.review} <FaRegThumbsUp style={{ margin: "2.8px" }} /> Reviews | Prepare this delicious recipe in : {recipe?.timeRequired} <IoTime style={{ margin: "6px 2px" }} />
         </Box>
       </Box>
-      <Box w={"80%"} mt={"5"} display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
+      <Box w={"80%"} ml={"-7"} mt={"5"} display={"flex"} alignItems={"center"} justifyContent={"space-evenly"}>
         <button style={{padding: "6px 14px", borderRadius: "6px", backgroundColor: "#4ce256", color: "white" }}>JUMP TO RECIPE</button>
         <button style={{padding: "6px 14px", borderRadius: "6px", backgroundColor: "#4ce256", color: "white" }}>JUMP TO VIDEO</button>
         <button style={{padding: "6px 14px", borderRadius: "6px", backgroundColor: "#4ce256", color: "white", display: "flex", alignItems: "center" }}> <RxCheckbox style={{marginTop: "2px"}}/> SAVE TO LIST</button>
         <button style={{padding: "6px 14px", borderRadius: "6px", backgroundColor: "#4ce256", color: "white", display: "flex", alignItems: "center" }}> <AiOutlineHeart style={{marginTop: "2px"}} /> SAVE RECIPE</button>
       </Box>
-      <Text  mt={"5"}><i>This post may contain affiliate links. Read my <span style={{color: "red", textDecoration: "underline"}}>disclosure policy.</span></i></Text>
+      <Text  mt={"5"}><i>This post may contain affiliate links. Read my <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}}>disclosure policy.</span></i></Text>
       <SimpleGrid
         columns={{ base: 1, lg: 1 }}
         spacing={{ base: 8, md: 10 }}
@@ -61,9 +80,7 @@ export const SingleRecipePage = () => {
           <Image
             rounded={"md"}
             alt={"product image"}
-            src={
-              "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyODE1MDl8MHwxfGFsbHx8fHx8fHx8fDE2Mzg5MzY2MzE&ixlib=rb-1.2.1&q=80&w=1080"
-            }
+            src={recipe?.image}
             fit={"cover"}
             align={"center"}
             w={"100%"}
@@ -82,6 +99,15 @@ export const SingleRecipePage = () => {
             }
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
+              <Text
+                fontSize={{ base: "16px", lg: "18px" }}
+                color={useColorModeValue("gray.500", "gray.300")}
+                fontWeight={"500"}
+                textTransform={"uppercase"}
+                mb={"4"}
+              >
+                DESCRIPTION
+              </Text>
               <Text fontSize={"lg"}>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
                 aliquid amet at delectus doloribus dolorum expedita hic, ipsum
