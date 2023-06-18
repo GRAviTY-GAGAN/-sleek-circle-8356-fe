@@ -66,7 +66,7 @@ function App() {
             </AdminPrivateRoute>
           }
         />
-        <Route path="/recipe" element={<RecipePage />} />
+        <Route path="/recipe/" element={<RecipePage />} />
         <Route path="/recipe/:id" element={<SingleRecipePage />} />
       </Routes>
       <Footer />

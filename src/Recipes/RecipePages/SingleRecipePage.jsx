@@ -24,18 +24,26 @@ import { useParams } from "react-router-dom";
 import { GridContainer } from "./GridContainer";
 import { Protein } from "../../DB/protein";
 
+const url =
+  process.env.NODE_ENV == "development"
+    ? import.meta.env.VITE_REACT_APP_LOCAL_URL
+    : import.meta.env.VITE_REACT_APP_PROD_URL;
+
 const getData = (url) => {
     return fetch(url).then((res) => res.json());
   };
 
 export const SingleRecipePage = () => {
-  const {category, id} = useParams();
+  const {id} = useParams();
   const [recipe, setRecipe] = useState([])  
 
+  // console.log(recipe);
+
   const fetchData = () => {
-    getData(`https://thzv8b-8080.csb.app/recipes/${[category]}/${id}`)
+    getData(`${url}/recipe/signleRecipe/${id}`)
       .then((res) => {
-        setRecipe(res);
+        // console.log(res, "ESULT")
+        setRecipe(res.recipe);
       })
       .catch((err) => {
         console.log(err);
@@ -59,7 +67,7 @@ export const SingleRecipePage = () => {
           {recipe?.name}
         </Heading>
         <Box display="flex" mt={"4"} fontSize={"1.2rem"}>
-          {recipe?.review} <FaRegThumbsUp style={{ margin: "2.8px" }} /> Reviews | Prepare this delicious recipe in : {recipe?.timeRequired} <IoTime style={{ margin: "6px 2px" }} />
+          {recipe?.review} <FaRegThumbsUp style={{ margin: "2.8px" }} /> Reviews | Prepare this delicious recipe in : {recipe?.timeRequired || recipe?.timeRequire} <IoTime style={{ margin: "6px 2px" }} />
         </Box>
         <Box mt={"3"}>
           <Text textTransform={"uppercase"}><span style={{fontWeight: "700", textDecoration: "underline"}}>COURSE:</span> {recipe?.course}</Text>
@@ -67,12 +75,7 @@ export const SingleRecipePage = () => {
         <Box mt={"3"}>
           <Text textTransform={"uppercase"}><span style={{fontWeight: "700", textDecoration: "underline"}}>CATEGORY:</span> {recipe?.category}</Text>
         </Box>
-      </Box>
-      <Box w={"80%"} ml={"-7"} mt={"5"} mb={"5"} display={"flex"} flexWrap={"wrap"} alignItems={"center"} justifyContent={"space-evenly"}>
-        <Button style={{padding: "6px 14px", borderRadius: "6px", backgroundColor: "#4ce256", color: "white" }}>JUMP TO RECIPE</Button>
-        <Button style={{padding: "6px 14px", borderRadius: "6px", backgroundColor: "#4ce256", color: "white" }}>JUMP TO VIDEO</Button>
-        <Button style={{padding: "6px 14px", borderRadius: "6px", backgroundColor: "#4ce256", color: "white", display: "flex", alignItems: "center" }}> <RxCheckbox style={{marginTop: "2px"}}/> SAVE TO LIST</Button>
-        <Button style={{padding: "6px 14px", borderRadius: "6px", backgroundColor: "#4ce256", color: "white", display: "flex", alignItems: "center" }}> <AiOutlineHeart style={{marginTop: "2px"}} /> SAVE RECIPE</Button>
+        <br />
       </Box>
       <Text ><i>This post may contain affiliate links. Read my <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}}>disclosure policy.</span></i></Text>
       <SimpleGrid
@@ -130,11 +133,11 @@ export const SingleRecipePage = () => {
               >
                 INGREDIENTS ADDED IN RECIPE
               </Text>
-              <Text fontSize={{ base: "16px", lg: "18px" }}>
-              <li>
-                <ul>{recipe?.ingredients}</ul>
-              </li>
-              </Text>
+              <Box fontSize={{ base: "16px", lg: "18px" }}>
+              
+                <ul>{recipe?.ingredients?.split("|").map((item,i) => <li key={i}>{item}</li>)}</ul>
+              
+              </Box>
             </Box>
             <Box spacing={{ base: 4, sm: 6 }}>
               <Text
@@ -148,14 +151,12 @@ export const SingleRecipePage = () => {
               >
                 HOW TO MAKE {recipe?.name}
               </Text>
-              <Text fontSize={{ base: "16px", lg: "18px" }}>
-              <li>
-                <ul>{recipe?.directions}</ul>
-              </li>
-              </Text>
+              <Box fontSize={{ base: "16px", lg: "18px" }}>
+                <ul>{recipe?.directions?.split("|").map((item, i) => <li key={Math.random(i)}>{item}</li>)}</ul>
+              </Box>
             </Box>
 
-            <Box spacing={{ base: 4, sm: 6 }}>
+            <Box>{recipe?.variations ? (<Box spacing={{ base: 4, sm: 6 }}>
               <Text
                 fontSize={{ base: "16px", lg: "25px" }}
                 color={useColorModeValue("gray.800", "gray.900")}
@@ -167,12 +168,10 @@ export const SingleRecipePage = () => {
               >
                 VARIATIONS
               </Text>
-              <Text fontSize={{ base: "16px", lg: "18px" }}>
-              <li>
-                <ul>{recipe?.variations}</ul>
-              </li>
-              </Text>
-            </Box>
+              <Box fontSize={{ base: "16px", lg: "18px" }}>
+              <ul>{recipe?.variations?.split("|").map((item,i) => <li key={Date.now()+i}>{item}</li>)}</ul>
+              </Box>
+            </Box>) : ''}</Box>
           </Stack>
 
         </Stack>

@@ -17,31 +17,35 @@ export const RecipeList = () => {
   const skeleton = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   const initialPage = searchParams.get("page");
   const [page, setPage] = useState(+initialPage || 1);
+  // const initialCategory = searchParams.getAll("category");
+  // const [category, setCategory] = useState(initialCategory || []);
   const dispatch = useDispatch();
   const location = useLocation();
   let ref = useRef();
   let pageLimit = Math.ceil(recipes.length/12);
+  // console.log(searchParams)
 
   let obj = {
     params: {
       category: searchParams.getAll("category"),
       course: searchParams.getAll("course"),
-      _page: searchParams.get("page"),
-      _limit: 12
+      page: searchParams.get("page"),
+      // _page: searchParams.get("page"),
+      // _limit: 12     
     },
   };
 
   //Search query
   const paramObj = {
     params: {
-      q: query && query,
+      title: query && query,
     },
   };
 
   //Pagination
   useEffect(() => {
     let param = {
-      page,
+      page
     };
     setSearchParams(param);
   }, [page]);
@@ -52,7 +56,7 @@ export const RecipeList = () => {
     dispatch(recipeData(obj));
   }, [location.search]);
 
-  //Search functionality
+  // Search functionality
   useEffect(() => {
     if (ref.current) {
       clearTimeout(ref.current);
@@ -100,8 +104,8 @@ export const RecipeList = () => {
         <div className="main">
             <div className="grid">
               {recipes.length > 0 &&
-                recipes.splice(0,12).map((el, i) => {
-                  return <ProductCard key={el.id} {...el} recipe={recipes}/>;
+                recipes.map((el, i) => {
+                  return <ProductCard key={el._id} {...el} recipe={recipes}/>;
                 })}
             </div>
         </div>
