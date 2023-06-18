@@ -146,10 +146,10 @@ export default function SimpleCard() {
                 <Link color={"blue.400"}>Forgot password?</Link>
               </Stack>
               <Button
-                bg={"green.500"}
+                bg={"#319795"}
                 color={"white"}
                 _hover={{
-                  bg: "green.600",
+                  bg: "#319795",
                 }}
                 onClick={handleAdminLogin}
               >

@@ -22,7 +22,7 @@ import RpLogo from "../assets/RpLogo.png";
 
 const Links = [
   { name: "Home", path: "/" },
-  { name: "Login", path: "/login" },
+  { name: "Recipe", path: "/recipe" },
   { name: "Signup", path: "/signup" },
   { name: "Course", path: "/course" },
   { name: "User", path: "/user" },
@@ -42,8 +42,8 @@ export default function Simple() {
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={8} alignItems={"center"}>
-            <Box w={"11rem"}>
+          <Flex w={"90%"} alignItems={"center"} justify={"space-between"}>
+            <Box w={"150px"}>
               <Image src={RpLogo} />
             </Box>
             <HStack
@@ -66,7 +66,7 @@ export default function Simple() {
                 </NavLink>
               ))}
             </HStack>
-          </HStack>
+          </Flex>
           <Flex alignItems={"center"}>
             <Menu>
               <MenuButton
@@ -84,21 +84,17 @@ export default function Simple() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem>Saved Recipes</MenuItem>
+                <MenuItem>Login</MenuItem>
+                {/* <MenuDivider />
+                <MenuItem>Link 3</MenuItem> */}
               </MenuList>
             </Menu>
           </Flex>
         </Flex>
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
-            <Stack
-              as={"nav"}
-              textAlign={"center"}
-              spacing={4}
-            >
+            <Stack as={"nav"} textAlign={"center"} spacing={4}>
               {Links.map((link) => (
                 <NavLink
                   style={({ isActive }) => ({

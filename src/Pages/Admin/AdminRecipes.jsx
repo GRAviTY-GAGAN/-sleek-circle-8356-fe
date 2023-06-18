@@ -62,6 +62,7 @@ const AdminRecipes = () => {
 
   const count = useSelector((store) => store.adminReducer.counts);
   // console.log(count, "COUNTS");
+  console.log(document.cookie, "DOCUMENT");
 
   const courses = ["Breakfast", "Lunch", "Dinner", "Starters", "Drinks"];
   function handleAddRecipe() {
@@ -167,7 +168,17 @@ const AdminRecipes = () => {
     borderColor: [],
   };
 
-  function handleSearchInputChange(e) {}
+  let searchDebounceId;
+  function handleSearchInputChange(e) {
+    if (searchDebounceId) {
+      clearTimeout(searchDebounceId);
+    }
+
+    searchDebounceId = setTimeout(() => {
+      // console.log(e.target.value)
+      setSearchString(e.target.value);
+    }, 1500);
+  }
 
   const options = {};
 
@@ -224,6 +235,31 @@ const AdminRecipes = () => {
           </Tilt>
         </Flex>
       </div>
+      <Flex
+        align={"center"}
+        justify={"center"}
+        display={{ base: "flex", md: "none" }}
+      >
+        <Input
+          onChange={(e) => handleSearchInputChange(e)}
+          w={"250px"}
+          borderColor={"gray.400"}
+          focusBorderColor="#c4ccd8"
+          borderRight={"none"}
+          borderTopRightRadius={"0"}
+          borderBottomRightRadius={"0"}
+          placeholder="medium size"
+          size="md"
+        />
+        <Button
+          border={"1px solid #c4ccd8"}
+          borderLeft={"none"}
+          borderTopLeftRadius={"0"}
+          borderBottomLeftRadius={"0"}
+        >
+          <Search2Icon />
+        </Button>
+      </Flex>
       <div
         style={{
           position: "sticky",
@@ -252,7 +288,7 @@ const AdminRecipes = () => {
               <HamburgerIcon />
             </Button>
           </div>
-          <Flex>
+          <Flex display={{ base: "none", md: "flex" }}>
             <Input
               onChange={(e) => handleSearchInputChange(e)}
               w={"350px"}
@@ -280,7 +316,11 @@ const AdminRecipes = () => {
       </div>
 
       {/* PRODUCTS START */}
-      <AdminProductsComponent setShow={setShow} show={show} />
+      <AdminProductsComponent
+        searchString={searchString}
+        setShow={setShow}
+        show={show}
+      />
       {/* PRODUCTS END */}
       <Box>
         <Modal

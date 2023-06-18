@@ -17,7 +17,7 @@ import AdminPagination from "./AdminPagination";
 import { useDispatch } from "react-redux";
 import { COURSE_COUNT } from "../../Redux/Role/actionTypes";
 
-const AdminProductsComponent = ({ show, setShow }) => {
+const AdminProductsComponent = ({ show, setShow, searchString }) => {
   const url =
     process.env.NODE_ENV == "development"
       ? import.meta.env.VITE_REACT_APP_LOCAL_URL
@@ -48,10 +48,15 @@ const AdminProductsComponent = ({ show, setShow }) => {
       course,
       page: pageNo,
     };
+
+    if (searchString) {
+      urlparams.title = searchParams;
+    }
+
     setSearchParams(urlparams);
     fetchProducts();
     // console.log(searchParams.get("page"));
-  }, [category, course, pageNo]);
+  }, [category, course, pageNo, searchString]);
 
   function fetchProducts() {
     setloading(true);
@@ -61,6 +66,7 @@ const AdminProductsComponent = ({ show, setShow }) => {
           page: pageNo,
           category,
           course,
+          title: searchString,
         },
       })
       .then((res) => {
@@ -220,7 +226,7 @@ const AdminProductsComponent = ({ show, setShow }) => {
                 name="prev"
                 onClick={(e) => handlePageChange(e.target.name)}
                 isDisabled={pageNo == 1}
-                backgroundColor={"green.400"}
+                backgroundColor={"#319795"}
                 color={"white"}
                 _hover={{
                   color: "black",
@@ -233,7 +239,7 @@ const AdminProductsComponent = ({ show, setShow }) => {
                 onClick={(e) => handlePageChange(e.target.name)}
                 name="next"
                 isDisabled={pageNo == recipesCount}
-                backgroundColor={"green.400"}
+                backgroundColor={"#319795"}
                 color={"white"}
                 _hover={{
                   color: "black",

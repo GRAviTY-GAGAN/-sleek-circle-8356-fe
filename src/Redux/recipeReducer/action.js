@@ -9,6 +9,7 @@ const url =
 export const recipeData = (data) => (dispatch) => {
   dispatch({ type: RECIPE_REQUEST });
   axios
+    // .get("https://thzv8b-8080.csb.app/recipes", data)
     .get(`${url}/recipe/`, data)
     .then((res) => {
       console.log(res);

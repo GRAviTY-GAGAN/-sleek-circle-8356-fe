@@ -12,7 +12,7 @@ const AdminPagination = ({ recipesCount, page, handlePageChange }) => {
     <div>
       <Flex justify={"center"} mt={4}>
         <Button
-          backgroundColor={"green.400"}
+          backgroundColor={"#319795"}
           color={"white"}
           _hover={{
             color: "black",
@@ -33,7 +33,7 @@ const AdminPagination = ({ recipesCount, page, handlePageChange }) => {
           {page}/{recipesCount}
         </Button>
         <Button
-          backgroundColor={"green.400"}
+          backgroundColor={"#319795"}
           _hover={{
             color: "black",
             background: "#edf2f7",
