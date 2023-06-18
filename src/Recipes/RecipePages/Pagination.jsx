@@ -4,7 +4,7 @@ import "./Pagination.css"
 import { Button } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
-export const Pagination = ({page, setPage, limit}) => {
+export const Pagination = ({page, setPage}) => {
   // console.log("Page",page)
   // console.log("setPage",setPage)
   // console.log("Limit",limit)

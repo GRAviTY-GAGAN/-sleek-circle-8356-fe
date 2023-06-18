@@ -5,7 +5,7 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
 
-function AdminProductCard({
+function Card({
   image,
   name,
   category,
@@ -13,20 +13,25 @@ function AdminProductCard({
   description,
   review,
   timeRequired,
-  timeRequire,
 }) {
   const [liked, setLiked] = useState(false);
 
-  // console.log(timeRequired);
-
   return (
-    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box
+      maxW="sm"
+      borderWidth="1px"
+      ml="1rem"
+      h={"80%"}
+      w={"90%"}
+      borderRadius="lg"
+      overflow="hidden"
+    >
       <Image
         src={image}
         alt={name}
         mt={"0"}
         w={"100%"}
-        h={"300px"}
+        h={"16rem"}
         cursor="pointer"
       />
 
@@ -82,17 +87,11 @@ function AdminProductCard({
           alignItems="center"
           justifyContent="space-between"
         >
-          <Box display="flex" flexWrap={"wrap"}>
-            <Flex justify={"center"} align={"center"}>
-              <IoTime style={{ margin: "6px 2px" }} />
-              <Box> {timeRequired || timeRequire}</Box>
-            </Flex>
-            &nbsp;|&nbsp;
-            <Flex justify={"center"} align={"center"}>
-              <Box>{review}</Box> <FaRegThumbsUp style={{ margin: "2.8px" }} />{" "}
-            </Flex>
+          <Box display="flex">
+            {review} <FaRegThumbsUp style={{ margin: "2.8px" }} /> |{" "}
+            {timeRequired} <IoTime style={{ margin: "6px 2px" }} />
           </Box>
-          {/* <Flex
+          <Flex
             p={1}
             mt={1}
             alignItems="center"
@@ -105,10 +104,10 @@ function AdminProductCard({
             ) : (
               <BsHeart fontSize={"20px"} />
             )}
-          </Flex> */}
+          </Flex>
         </Box>
       </Box>
     </Box>
   );
 }
-export default AdminProductCard;
+export default Card;

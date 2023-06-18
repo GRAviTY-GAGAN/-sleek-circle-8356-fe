@@ -5,14 +5,14 @@ import { WarningTwoIcon } from "@chakra-ui/icons";
 import { Box, Heading, SkeletonText } from "@chakra-ui/react";
 import { recipeData } from "../../Redux/recipeReducer/action";
 import ProductCard from "../RecipePages/ProductCard";
-import "./RecipeList.css"
+import "./RecipeList.css";
 import { Pagination } from "../RecipePages/Pagination";
 
 export const RecipeList = () => {
   const [query, setQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const recipes = useSelector(store => store.recipeReducer.recipes);
-  console.log(recipes.length)
+  const recipes = useSelector((store) => store.recipeReducer.recipes);
+  console.log(recipes.length);
   const loading = useSelector((store) => store.recipeReducer.isLoading);
   const skeleton = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   const initialPage = searchParams.get("page");
@@ -22,8 +22,6 @@ export const RecipeList = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   let ref = useRef();
-  let pageLimit = Math.ceil(recipes.length/12);
-  // console.log(searchParams)
 
   let obj = {
     params: {
@@ -50,7 +48,7 @@ export const RecipeList = () => {
     setSearchParams(param);
   }, [page]);
 
-//   //Fetching Data
+  //   //Fetching Data
   useEffect(() => {
     console.log("data", obj);
     dispatch(recipeData(obj));
@@ -68,7 +66,7 @@ export const RecipeList = () => {
   }, [query]);
 
   return (
-    <div style={{textAlign: "left"}}>
+    <div style={{ textAlign: "left" }}>
       <div className="input">
         <input
           type="text"
@@ -77,7 +75,7 @@ export const RecipeList = () => {
           placeholder="Search 🔍"
           onChange={(e) => setQuery(e.target.value)}
         />
-      </div> 
+      </div>
 
       {loading ? (
         <div className="grid">
@@ -118,7 +116,7 @@ export const RecipeList = () => {
         </Box>
       )}
       <Box>
-        <Pagination page={page} setPage={setPage} limit={pageLimit} />
+        <Pagination page={page} setPage={setPage} />
       </Box>
     </div>
   );

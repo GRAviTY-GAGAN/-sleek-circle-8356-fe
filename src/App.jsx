@@ -7,7 +7,7 @@ import Home from "./Pages/Home";
 import Footer from "./components/Footer";
 import AdminLogin from "./Pages/Admin/AdminLogin";
 import Admin from "./Pages/Admin/Admin";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AdminNavbar from "./components/Admin/AdminNavbar";
 import AdminRecipes from "./Pages/Admin/AdminRecipes";
@@ -23,6 +23,9 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const adminReducer = useSelector((store) => store.adminReducer);
+  console.log(adminReducer, "ADMINREDUCER");
 
   useEffect(() => {
     if (!storeAdmin) {
@@ -48,14 +51,14 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
-        <Route
+        {/* <Route
           path="/admin"
           element={
             <AdminPrivateRoute>
               <Admin />
             </AdminPrivateRoute>
           }
-        />
+        /> */}
         <Route path="/signup" element={<Signup />} />
         <Route path="/adminLogin" element={<AdminLogin />} />
         <Route
