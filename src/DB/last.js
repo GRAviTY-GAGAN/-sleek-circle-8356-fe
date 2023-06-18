@@ -1,0 +1,60 @@
+export const last = [{
+    id: 2,
+    image: "https://www.skinnytaste.com/wp-content/uploads/2023/04/Green-Smoothie-Bowl-5-1024x1536.jpg",
+    name: "Green Smoothie Bowl",
+    description: "This tropical Green Smoothie Bowl is a simple way to add one cup of veggies to your morning breakfast! I used frozen mango, banana, and spinach as the base with protein milk and yogurt for extra protein. I love buying green smoothie bowls at SoBol, but making them yourself is cheaper, and you can control how much sugar is added. Just prep your fruit and freeze it so you can whip it up in the morning, or buy frozen fruit to make this smoothie bowl recipe quicker and easier. It’s so delicious that you’ll forget you’re eating something healthy! More smoothie bowl recipes you might like are Protein PB&J Smoothie Bowl, Oatmeal Berry Smoothie Bowl, and Strawberry Peanut Butter Swirl Smoothie Bowls.",
+    category: "Veg",
+    ingredients: "Fruit: One cup of frozen mango and one banana | Spinach: Baby spinach gives this smoothie bowl its green color. I think spinach is the best type of smoothie bowl greens for a smoothie because it has a milder flavor than others. | Milk: I used this plant based protein milk, but anyone of them will work. You can also use another type, like almond, soy, or even regular cow’s milk |  | Yogurt: I used dairy-free Cocoyo, but any yogurt will work |  | Smoothie Bowl Toppings: Mango, strawberries, unsweetened coconut flakes",
+    directions: "To begin, puree half of the banana with the frozen mango, spinach, protein milk, and yogurt in a blender until smooth. | Once the smoothie is blended, pour it into a bowl. Dice the remaining half of the banana and sprinkle it on top with the diced mango, strawberries, and coconut flakes.",
+    variations: "Tropical Smoothie Bowl: Swap out the strawberries for pineapple, and top the bowl with kiwi, shredded coconut, and macadamia nuts for a taste of the tropics | Chocolate Banana Smoothie Bowl: Add a tablespoon of cocoa powder to the smoothie mix and top it with sliced bananas, almonds, and cacao nibs for a chocolaty twist | Berry Blast Smoothie Bowl: Use mixed berries instead of mango and strawberries in the smoothie mix and top it with fresh berries and granola for a burst of flavor | Peanut Butter Banana Smoothie Bowl: Add a tablespoon of peanut butter to the smoothie and top the bowl with sliced bananas, granola, and a drizzle of peanut butter.",
+    course: "Breakfast",
+    review: "2.1k"
+},
+{
+    id: 3,
+    image: "https://www.skinnytaste.com/wp-content/uploads/2023/05/English-Muffin-Egg-Sandwich-10-1024x1536.jpg",
+    name: "English Muffin Breakfast Sandwich",
+    description: "Skip the drive-thru and make your own breakfast sandwiches! Nothing makes me happier than an egg sandwich for breakfast, and these healthier English Muffin Breakfast Sandwiches take less than 10 minutes to whip up. They’re also easy to make ahead and refrigerate or freeze to reheat during the week. More of my favorite healthy breakfast sandwich recipes are this Bacon Avocado Bagel Sandwich, Breakfast BLT, and Omelet Tortilla Breakfast Wrap.",
+    category: "Veg",
+    ingredients: "English Muffin: Toast two whole-wheat English muffins.Turkey Bacon: Cut two slices of turkey bacon in half. | Cheese: Use sharp cheddar cheese | Eggs: I fried the eggs and kept the yolks runny, which I love, but you can cook them to your liking. You can also scramble them if you prefer. | Salt and Pepper to season the eggs | Optional: Top with hot sauce, ketchup, mustard, or any other condiment you like.",
+    directions: "Toast the English Muffins: Slice the muffins in half, top with cheese, and toast in the toaster oven or broiler about six inches from the flame until the cheese melts. | Cook the Eggs: Crack the eggs in a nonstick pan, season with a pinch of salt and black pepper, and cook on low, covered, until the yolks are cooked to your liking. | Assemble the Sandwiches: Place the bacon on one muffin half and the egg on the other, and top with condiments if desired.",
+    variations: "Meat: Swap the turkey bacon for ham, Taylor ham, center-cut bacon, Canadian bacon or a turkey sausage patty. | Bread: Switch up the bread and use gluten-free muffins, rolls, bagels, or sliced bread. | Cheese: Substitute cheddar with Pepper Jack, provolone, mozzarella or Swiss. | Seasoning: Season the eggs with everything bagel seasoning or Tajin. | Vegetables: Add avocado, red onion, or tomato. | Vegetarian Breakfast Sandwich: Leave out the meat. | Make It Dairy-free: Skip the cheese or use dairy-free cheese.",
+    course: "Breakfast",
+    review: "4.2k"
+},
+{
+    id: 4,
+    image: "https://www.skinnytaste.com/wp-content/uploads/2023/04/Roasted-Strawberry-Almond-Flour-Muffins-8-1024x1536.jpg",
+    name: "Roasted Strawberry Almond Flour Muffins",
+    description: "These healthy almond flour muffins are delicious for breakfast or a snack. Roasting the strawberries is a real game changer. It makes them sweeter and dries them out so the muffins don’t get too moist. For more of my favorite strawberry recipes, try my Roasted Strawberry Banana Bread, Strawberry Scones, and Strawberry Crisp.",
+    category: "Veg",
+    ingredients: "Strawberries: Slice fresh strawberries. | Sugar: Toss some of the sugar with the berries, and the rest goes in the muffin batter. | Flour: Almond and oat flours increase the protein and fiber while keeping the muffins gluten-free. | Baking Soda and Baking Powder make the strawberry muffins rise and give them a fluffy texture. | Butter: Make sure your butter is at room temperature so it mixes easily with the sugar. | Eggs: Use three egg whites or two large eggs. | Vanilla Extract for flavor | Greek Yogurt: You’ll need one cup of fat-free Greek yogurt.",
+    directions: "Boil the eggs on the stove or in the Instant Pot. Let the eggs cool and slice them in half lengthwise. | Egg Yolk Mixture: Remove the yolks and put them in a bowl, mash with a fork along with the mayo, mustard, salt, and pepper. | Pipe the Yolks and Garnish: Mash the mixture until it has a creamy texture and transfer it to a plastic bag or piping bag. Snip the corner and pipe it into the egg whites. Place on a serving platter and top with chives, sprinkle with paprika.",
+    variations: "Blueberry Muffins: Swap strawberries for blueberries or another type of berry. | Frozen Berries: You can use frozen strawberries if fresh aren’t in season. | Spices: Add a little cinnamon. | Strawberry Bread: Pour the batter into a loaf pan and bake at 350°F for about 50 minutes until a toothpick comes out clean.",
+    course: "Breakfast",
+    review: "4.1k"
+},
+{
+    id: 5,
+    image: "https://www.skinnytaste.com/wp-content/uploads/2013/04/Broccoli-and-Cheese-Egg-Muffins-9-400x600.jpg",
+    name: "Broccoli and Cheese Egg Muffins",
+    description: "These egg muffins are a great way to start the morning because they are high in protein, taste great and satisfy me until lunch. You can fill them with any combination of vegetables, cheese and meats you like. I refrigerate them, then pop them in the microwave for one minute when I need a quick breakfast. I also make egg white muffins if you want something leaner.",
+    category: "Non-Veg",
+    ingredients: "Eggs: Hard boil four eggs. | Mayo: Use two tablespoons of light, regular, or whole30 approved mayonnaise. | Dijon: The Dijon mustard adds a little tang to the mixture. | Seasoning: Paprika, salt, pepper | Herbs: Top with chopped fresh chives.",
+    directions: "Boil the eggs on the stove or in the Instant Pot. Let the eggs cool and slice them in half lengthwise. | Egg Yolk Mixture: Remove the yolks and put them in a bowl, mash with a fork along with the mayo, mustard, salt, and pepper. | Pipe the Yolks and Garnish: Mash the mixture until it has a creamy texture and transfer it to a plastic bag or piping bag. Snip the corner and pipe it into the egg whites. Place on a serving platter and top with chives, sprinkle with paprika.Roast the Strawberries: Sprinkle two tablespoons of sugar over the strawberries. Place the berries on a parchment paper-lined baking sheet in a single layer and roast for 25 minutes at 375°F until the strawberries release their liquid and caramelize. | Dry Ingredients: Whisk the oat and almond flours, baking soda, and baking powder. | Wet Ingredients: In a large bowl, cream the butter and sugar for about two minutes with a hand mixer. Beat the egg whites and vanilla in a small bowl and pour into the butter/sugar mixture. Stir in the yogurt. | Mix the flour mixture with the wet ingredients until combined. Fold in the strawberries with a spatula and spoon into a lined muffin tin. | Bake the almond flour muffins at 375°F for 18 to 20 minutes until a toothpick inserted in the center comes out clean.",
+    variations: "Mayo: Substitute Greek yogurt for mayonnaise. | Pickles: For extra flavor, add your favorite sweet pickle relish, chopped dill pickles or pickle juice to the yolk filling. | Vinegar: Stir in a little red wine vinegar for a bit of acidity. | Bacon: Top them with chopped bacon before eating. | Fresh Herbs: Swap chives for fresh dill, parsley or finely chopped scallions. | Make it Spicy: Add horseradish, hot sauce, cayenne pepper or jalapeño. | Spices: Sub chili powder for paprika. | How to Pipe Deviled Eggs: A star-tipped piping tip (affiliate link) will give you the prettiest eggs, but if you don’t have one, you can use a zip-locked bag with the end snipped off.",
+    course: "Breakfast",
+    review: "1.2k"
+},
+{
+    id: 6,
+    image: "https://www.skinnytaste.com/wp-content/uploads/2023/02/Tropical-Chia-Pudding-Breakfast-Bowl-9.jpg",
+    name: "Tropical Chia Pudding Breakfast Bowl",
+    description: "This easy, high-protein, Tropical Chia Pudding Breakfast Bowl is creamy and delicious, made with chia seeds, Greek yogurt, mango and kiwi. “Why not add a natural boost from Greek yogurt to my pudding?” The results were delicious! The yogurt supplies a whopping 12 grams of protein per serving and creates a thicker, creamier pudding consistency, providing the perfect base layer for the tropical fruit topping. And toasted coconut is the perfect finale, giving it a little texture and a delicious, nutty flavor. If you want more chia recipes, try my Mango Coconut Chia Pudding or this 15-Minute Protein Chia Seed Cereal.",
+    category: "Veg",
+    ingredients: "Chia Seeds: You’ll need a quarter cup of chia seeds for the pudding. | Milk: I used unsweetened vanilla almond milk, but any kind will work. Use dairy, oat, hemp, etc. | Yogurt: I used nonfat plain Greek yogurt with probiotics, you can use dairy-free yogurt to make it DF but the protein will be less. | Sweetener: Monk fruit, stevia, maple syrup, or honey will work. | Fruit: Kiwi, mango are used here but papaya or pineapple could also work! | Coconut: Top the bowls with shredded, unsweetened coconut.",
+    directions: "Chia Pudding: Whisk chia seeds, almond milk, yogurt, and sweetener in a large container and refrigerate for a minimum of two hours or as long as overnight. | Toasted Coconut: Heat a small skillet on medium-low and toast the coconut for about four minutes until golden brown. | Assemble the Breakfast Bowls: Divide the pudding into two small bowls and top with kiwi, mango, and coconut. Drizzle with a little extra sweetener if desired.",
+    variations: "Fruit: Swap mango or kiwi for pineapple, papaya, or cantaloupe to keep it tropical or a mix of fresh berries. | Coconut: You can also toast the coconut in the oven at 325°F for about five to ten minutes. And if all you have is sweetened coconut, it will work. | Milk: Use 2%, oat, or coconut milk if you prefer.",
+    course: "Breakfast",
+    review: "4.1k"
+},]
