@@ -12,6 +12,7 @@ const Subscription = () => {
         bg={"#edf2f6"}
         p={"1rem"}
         mt={"2rem"}
+        mb={"1rem"}
       >
         <Box
           textAlign={"center"}

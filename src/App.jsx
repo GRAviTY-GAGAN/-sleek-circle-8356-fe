@@ -7,7 +7,7 @@ import Home from "./Pages/Home";
 import Footer from "./components/Footer";
 import AdminLogin from "./Pages/Admin/AdminLogin";
 import Admin from "./Pages/Admin/Admin";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AdminNavbar from "./components/Admin/AdminNavbar";
 import AdminRecipes from "./Pages/Admin/AdminRecipes";
