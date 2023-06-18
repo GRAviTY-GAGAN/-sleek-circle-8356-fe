@@ -15,11 +15,21 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { ADMIN_TYPE } from "../Redux/Role/actionTypes";
+
+const url =
+  process.env.NODE_ENV == "development"
+    ? import.meta.env.VITE_REACT_APP_LOCAL_URL
+    : import.meta.env.VITE_REACT_APP_PROD_URL;
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     const payload = {
@@ -28,16 +38,25 @@ export default function Login() {
     };
     if (email && password) {
       axios
-        .post("", payload)
+        .post(`${url}/users/login`, payload)
         .then((res) => {
-          console.log(res.data);
+          console.log(res, "LOGIN");
           toast({
-            title: "Account created.",
-            description: "We've created your account for you.",
-            status: "success",
+            title: res.statusText,
+            description: res.data.msg,
+            status: res.data.status,
             duration: 6000,
             isClosable: true,
+            position: "top",
           });
+
+          if (res.data.status === "success") {
+            localStorage.setItem("token", res.data.token);
+            dispatch({ type: ADMIN_TYPE, payload: false, role: "user" });
+            setTimeout(() => {
+              navigate("/");
+            }, 2000);
+          }
         })
         .catch((err) => console.log(err));
     } else {
@@ -47,6 +66,7 @@ export default function Login() {
         status: "error",
         duration: 6000,
         isClosable: true,
+        position: "top",
       });
     }
   };
@@ -88,25 +108,28 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormControl>
-            <Stack spacing={10}>
+            <Stack spacing={2}>
               <Stack
                 direction={{ base: "column", sm: "row" }}
                 align={"start"}
-                justify={"space-between"}
+                justify={"end"}
               >
-                <Checkbox>Remember me</Checkbox>
+                {/* <Checkbox>Remember me</Checkbox> */}
                 <Link color={"blue.400"}>Forgot password?</Link>
               </Stack>
               <Button
-                bg={"blue.400"}
+                bg={"#319795"}
                 color={"white"}
                 onClick={handleClick}
                 _hover={{
-                  bg: "blue.500",
+                  bg: "#319795",
                 }}
               >
                 Log in
               </Button>
+              <NavLink to={"/signup"} style={{ textAlign: "center" }}>
+                <Link color={"blue.400"}>Create account? Signup</Link>
+              </NavLink>
             </Stack>
           </Stack>
         </Box>

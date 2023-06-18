@@ -15,12 +15,19 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
+import { NavLink } from "react-router-dom";
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
   const toast = useToast();
+
+  const url =
+    process.env.NODE_ENV == "development"
+      ? import.meta.env.VITE_REACT_APP_LOCAL_URL
+      : import.meta.env.VITE_REACT_APP_PROD_URL;
 
   const handleClick = () => {
     const payload = {
@@ -29,16 +36,29 @@ export default function Signup() {
       password,
     };
     if (name && email && password) {
+      if (password !== confPassword) {
+        toast({
+          title: "Password did not match.",
+          description: "Password and confirm password should match.",
+          status: "warning",
+          duration: 6000,
+          isClosable: true,
+          position: "top",
+        });
+        return;
+      }
+
       axios
-        .post("", payload)
+        .post(`${url}/users/signup`, payload)
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
           toast({
-            title: "Account created.",
-            description: "We've created your account for you.",
-            status: "success",
+            title: res.statusText,
+            description: res.data.msg,
+            status: res.data.status,
             duration: 6000,
             isClosable: true,
+            position: "top",
           });
         })
         .catch((err) => console.log(err));
@@ -49,6 +69,7 @@ export default function Signup() {
         status: "error",
         duration: 6000,
         isClosable: true,
+        position: "top",
       });
     }
   };
@@ -98,15 +119,24 @@ export default function Signup() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormControl>
-            <Stack spacing={10}>
+            <FormControl id="password">
+              <FormLabel>Confirm Password</FormLabel>
+              <Input
+                type="password"
+                value={confPassword}
+                onChange={(e) => setConfPassword(e.target.value)}
+              />
+            </FormControl>
+            <Stack spacing={2}>
               <Stack
                 direction={{ base: "column", sm: "row" }}
                 align={"start"}
-                justify={"space-between"}
+                justify={"end"}
               >
-                <Checkbox>Remember me</Checkbox>
+                {/* <Checkbox>Remember me</Checkbox> */}
                 <Link color={"blue.400"}>Forgot password?</Link>
               </Stack>
+
               <Button
                 bg={"blue.400"}
                 color={"white"}
@@ -119,6 +149,9 @@ export default function Signup() {
               >
                 Sign in
               </Button>
+              <NavLink to={"/login"} style={{ textAlign: "center" }}>
+                <Link color={"blue.400"}>Already have an account? Login.</Link>
+              </NavLink>
             </Stack>
           </Stack>
         </Box>

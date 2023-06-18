@@ -15,8 +15,8 @@ const Home = () => {
         <RecipeCarousel />
         <NewCarousel />
         <Last />
-        <Subscription />
       </div>
+      <Subscription />
     </>
   );
 };

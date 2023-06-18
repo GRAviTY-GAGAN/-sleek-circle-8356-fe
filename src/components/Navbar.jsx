@@ -15,10 +15,13 @@ import {
   useColorModeValue,
   Stack,
   Image,
+  useToast,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import RpLogo from "../assets/RpLogo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { ADMIN_TYPE } from "../Redux/Role/actionTypes";
 
 const Links = [
   { name: "Home", path: "/" },
@@ -30,6 +33,28 @@ const Links = [
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const adminReducer = useSelector((store) => store.adminReducer);
+  const dispatch = useDispatch();
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    navigate("/");
+    localStorage.setItem("token", "");
+    toast({
+      title: "Logged out.",
+      description: "User logged out successfully.",
+      status: "success",
+      duration: 6000,
+      isClosable: true,
+      position: "top",
+    });
+    dispatch({ type: ADMIN_TYPE, payload: false, role: "" });
+  }
+
+  function handleLogin() {
+    navigate("/login");
+  }
 
   return (
     <>
@@ -77,15 +102,19 @@ export default function Simple() {
                 minW={0}
               >
                 <Avatar
-                  size={"sm"}
+                  size={"md"}
                   src={
                     "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
                   }
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Saved Recipes</MenuItem>
-                <MenuItem>Login</MenuItem>
+                <MenuItem>Saved Recipes</MenuItem>{" "}
+                {!adminReducer.admin && adminReducer.role == "user" ? (
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                ) : (
+                  <MenuItem onClick={handleLogin}>Login</MenuItem>
+                )}
                 {/* <MenuDivider />
                 <MenuItem>Link 3</MenuItem> */}
               </MenuList>

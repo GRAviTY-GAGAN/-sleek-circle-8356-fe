@@ -24,6 +24,9 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const adminReducer = useSelector((store) => store.adminReducer);
+  console.log(adminReducer, "ADMINREDUCER");
+
   useEffect(() => {
     if (!storeAdmin) {
       dispatch(verifyToken());

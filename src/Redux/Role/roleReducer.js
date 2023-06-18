@@ -2,6 +2,7 @@ import { ADMIN_TYPE, COURSE_COUNT } from "./actionTypes";
 
 const initialState = {
   admin: false,
+  role: "",
   counts: {
     breakfastCount: 3,
     lunchCount: 6,
@@ -14,7 +15,7 @@ const initialState = {
 export function adminReducer(state = initialState, action) {
   switch (action.type) {
     case ADMIN_TYPE: {
-      return { ...state, admin: action.payload };
+      return { ...state, admin: action.payload, role: action.role };
     }
 
     case COURSE_COUNT: {

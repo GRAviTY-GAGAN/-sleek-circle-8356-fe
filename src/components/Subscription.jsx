@@ -9,10 +9,10 @@ const Subscription = () => {
         justifyContent={"space-around"}
         gap={"2rem"}
         w={"100%"}
-        bg={"#edf2f6"}
+        bg={"#f7fafc"}
         p={"1rem"}
         mt={"2rem"}
-        mb={"1rem"}
+        // mb={"1rem"}
       >
         <Box
           textAlign={"center"}
@@ -25,7 +25,7 @@ const Subscription = () => {
             GET YOUR OWN
           </Text>
           <Text fontSize={"3xl"}>Recipe Fit Cookbooks!</Text>
-          <Flex  p={"1rem"} justify={"center"}>
+          <Flex p={"1rem"} justify={"center"}>
             <Image
               w={"20%"}
               src="https://www.skinnytaste.com/wp-content/uploads/2023/03/skinnytaste-simple-book-cover-125.jpg"
