@@ -12,7 +12,7 @@ export const RecipeList = () => {
   const [query, setQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const recipes = useSelector((store) => store.recipeReducer.recipes);
-  console.log(recipes.length);
+  // console.log(recipes.length);
   const loading = useSelector((store) => store.recipeReducer.isLoading);
   const skeleton = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   const initialPage = searchParams.get("page");
@@ -29,7 +29,7 @@ export const RecipeList = () => {
       course: searchParams.getAll("course"),
       page: searchParams.get("page"),
       // _page: searchParams.get("page"),
-      // _limit: 12     
+      // _limit: 12
     },
   };
 
@@ -43,14 +43,14 @@ export const RecipeList = () => {
   //Pagination
   useEffect(() => {
     let param = {
-      page
+      page,
     };
     setSearchParams(param);
   }, [page]);
 
   //   //Fetching Data
   useEffect(() => {
-    console.log("data", obj);
+    // console.log("data", obj);
     dispatch(recipeData(obj));
   }, [location.search]);
 
@@ -100,12 +100,12 @@ export const RecipeList = () => {
         </div>
       ) : !loading && recipes.length ? (
         <div className="main">
-            <div className="grid">
-              {recipes.length > 0 &&
-                recipes.map((el, i) => {
-                  return <ProductCard key={el._id} {...el} recipe={recipes}/>;
-                })}
-            </div>
+          <div className="grid">
+            {recipes.length > 0 &&
+              recipes.map((el, i) => {
+                return <ProductCard key={el._id} {...el} recipe={recipes} />;
+              })}
+          </div>
         </div>
       ) : (
         <Box textAlign="center" py={10} px={6}>

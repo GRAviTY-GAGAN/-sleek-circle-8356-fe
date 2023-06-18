@@ -20,15 +20,17 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { NavLink, useNavigate } from "react-router-dom";
 import RpLogo from "../assets/RpLogo.png";
+import userAvatar from "../assets/User-avatar.svg.webp";
+import avatar from "../assets/avatar.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { ADMIN_TYPE } from "../Redux/Role/actionTypes";
 
 const Links = [
   { name: "Home", path: "/" },
   { name: "Recipe", path: "/recipe" },
-  { name: "Signup", path: "/signup" },
-  { name: "Course", path: "/course" },
-  { name: "User", path: "/user" },
+  // { name: "Signup", path: "/signup" },
+  // { name: "Course", path: "/course" },
+  // { name: "User", path: "/user" },
 ];
 
 export default function Simple() {
@@ -54,6 +56,10 @@ export default function Simple() {
 
   function handleLogin() {
     navigate("/login");
+  }
+
+  function handleSavedPage() {
+    navigate("/savedRecipes");
   }
 
   return (
@@ -103,13 +109,14 @@ export default function Simple() {
               >
                 <Avatar
                   size={"md"}
-                  src={
-                    "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                  }
+                  style={{
+                    border: adminReducer.role == "user" ? "" : "1px solid teal",
+                  }}
+                  src={adminReducer.role == "user" ? avatar : userAvatar}
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Saved Recipes</MenuItem>{" "}
+                <MenuItem onClick={handleSavedPage}>Saved Recipes</MenuItem>{" "}
                 {!adminReducer.admin && adminReducer.role == "user" ? (
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 ) : (

@@ -5,8 +5,11 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { DeleteIcon } from "@chakra-ui/icons";
+import "./UserProductCard.css";
+import axios from "axios";
 
-function AdminProductCard({
+function UserProductCard({
   _id,
   image,
   name,
@@ -16,23 +19,39 @@ function AdminProductCard({
   review,
   timeRequired,
   timeRequire,
+  handleRemoveRecipe,
 }) {
   const [liked, setLiked] = useState(false);
 
-  // console.log(timeRequired);
+  const url =
+    process.env.NODE_ENV == "development"
+      ? import.meta.env.VITE_REACT_APP_LOCAL_URL
+      : import.meta.env.VITE_REACT_APP_PROD_URL;
 
   return (
-    <Link to={`/recipe/${_id}`}>
-      <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-        <Image
-          src={image}
-          alt={name}
-          mt={"0"}
-          w={"100%"}
-          h={"300px"}
-          cursor="pointer"
-        />
-
+    <>
+      <Box
+        className="UserProductCard__mainCont"
+        position={"relative"}
+        maxW="sm"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        cursor={"default"}
+      >
+        <Box
+          zIndex={2}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleRemoveRecipe(_id);
+          }}
+          cursor={"pointer"}
+          className="UserProductCard__delete"
+          bg={"red.500"}
+        >
+          <DeleteIcon />
+        </Box>
+        <Image src={image} alt={name} mt={"0"} w={"100%"} h={"300px"} />
         <Box pt="2" pl="4" pr="4" pb="2">
           <Box
             display="flex"
@@ -117,7 +136,7 @@ function AdminProductCard({
           </Box>
         </Box>
       </Box>
-    </Link>
+    </>
   );
 }
-export default AdminProductCard;
+export default UserProductCard;

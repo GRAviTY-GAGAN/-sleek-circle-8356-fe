@@ -11,11 +11,11 @@ const url =
 export const verifyToken = () => async (dispatch) => {
   const token = localStorage.getItem("token");
   if (token) {
-    console.log("HERE");
+    // console.log("HERE");
     return await axios
       .post(`${url}/users/verify`, { token })
       .then((res) => {
-        console.log(res, "VERIFY");
+        // console.log(res, "VERIFY");
         if (res.data.decoded.role == "admin") {
           dispatch({
             type: ADMIN_TYPE,

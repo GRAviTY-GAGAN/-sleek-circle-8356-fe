@@ -138,13 +138,13 @@ export default function Signup() {
               </Stack>
 
               <Button
-                bg={"blue.400"}
-                color={"white"}
                 onClick={() => {
                   handleClick();
                 }}
+                bg={"#319795"}
+                color={"white"}
                 _hover={{
-                  bg: "blue.500",
+                  bg: "#319795",
                 }}
               >
                 Sign in

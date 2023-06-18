@@ -7,14 +7,17 @@ const url =
     : import.meta.env.VITE_REACT_APP_PROD_URL;
 
 export const recipeData = (data) => (dispatch) => {
-  console.log("paramsdata",data)
+  // console.log("paramsdata",data)
   dispatch({ type: RECIPE_REQUEST });
   axios
     // .get("https://thzv8b-8080.csb.app/recipes", data)
     .get(`${url}/recipe/`, data)
     .then((res) => {
       console.log(res);
-      dispatch({ type: RECIPE_SUCCESS, payload: res.data.recipes, totalrecipe: res.data.recipesCount
+      dispatch({
+        type: RECIPE_SUCCESS,
+        payload: res.data.recipes,
+        totalrecipe: res.data.recipesCount,
       });
     })
     .catch((err) => {

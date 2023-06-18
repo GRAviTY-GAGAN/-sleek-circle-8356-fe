@@ -60,6 +60,8 @@ const AdminRecipes = () => {
   const [show, setShow] = useState(false);
   const [searchString, setSearchString] = useState("");
 
+  const [productAdded, setProductAdded] = useState(false);
+
   const count = useSelector((store) => store.adminReducer.counts);
   // console.log(count, "COUNTS");
   console.log(document.cookie, "DOCUMENT");
@@ -115,6 +117,9 @@ const AdminRecipes = () => {
           setreview("");
           settimeRequired("");
           setvariations("");
+          if (res.data.status == "success") {
+            setProductAdded(!productAdded);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -317,6 +322,7 @@ const AdminRecipes = () => {
 
       {/* PRODUCTS START */}
       <AdminProductsComponent
+        productAdded={productAdded}
         searchString={searchString}
         setShow={setShow}
         show={show}

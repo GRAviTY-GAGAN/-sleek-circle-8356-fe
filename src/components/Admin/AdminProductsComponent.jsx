@@ -12,12 +12,18 @@ import React, { useEffect, useRef, useState } from "react";
 import ProductCard from "../../Recipes/RecipePages/ProductCard";
 import AdminProductCard from "./AdminProductCard";
 import { CloseIcon, WarningTwoIcon } from "@chakra-ui/icons";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import AdminPagination from "./AdminPagination";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { COURSE_COUNT } from "../../Redux/Role/actionTypes";
+import { LOCATION_ACTION_TYPE } from "../../Redux/locationReducer/actionTypes";
 
-const AdminProductsComponent = ({ show, setShow, searchString }) => {
+const AdminProductsComponent = ({
+  show,
+  setShow,
+  searchString,
+  productAdded,
+}) => {
   const url =
     process.env.NODE_ENV == "development"
       ? import.meta.env.VITE_REACT_APP_LOCAL_URL
@@ -38,11 +44,16 @@ const AdminProductsComponent = ({ show, setShow, searchString }) => {
 
   const dispatch = useDispatch();
   const limitReq = useRef(0);
+  const location = useLocation();
   // console.log(limitReq);
-
   // category.length > 0 ? (urlparams.category = category) : "";
 
   useEffect(() => {
+    dispatch({
+      type: LOCATION_ACTION_TYPE,
+      payload: location.pathname + location.search,
+    });
+    // console.log("LOCATION", locationstore);
     const urlparams = {
       category: category,
       course,
@@ -56,7 +67,7 @@ const AdminProductsComponent = ({ show, setShow, searchString }) => {
     setSearchParams(urlparams);
     fetchProducts();
     // console.log(searchParams.get("page"));
-  }, [category, course, pageNo, searchString]);
+  }, [category, course, pageNo, searchString, productAdded]);
 
   function fetchProducts() {
     setloading(true);

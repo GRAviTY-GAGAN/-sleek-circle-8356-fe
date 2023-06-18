@@ -15,6 +15,7 @@ import AdminPrivateRoute from "./components/Admin/AdminPrivateRoute";
 import { verifyToken } from "./Redux/Role/actionTypes";
 import { RecipePage } from "./Recipes/RecipePages/RecipePage";
 import { SingleRecipePage } from "./Recipes/RecipePages/SingleRecipePage";
+import SavedRecipes from "./Pages/SavedRecipes";
 
 function App() {
   const storeAdmin = useSelector((store) => {
@@ -25,7 +26,7 @@ function App() {
   const location = useLocation();
 
   const adminReducer = useSelector((store) => store.adminReducer);
-  console.log(adminReducer, "ADMINREDUCER");
+  // console.log(adminReducer, "ADMINREDUCER");
 
   useEffect(() => {
     if (!storeAdmin) {
@@ -35,7 +36,7 @@ function App() {
     // console.log(location, storeAdmin);
 
     if (storeAdmin) {
-      navigate(location.state ? location.state : "/admin");
+      navigate(location.state ? location.state : "/adminRecipes");
     }
   }, [storeAdmin]);
 
@@ -61,6 +62,7 @@ function App() {
         /> */}
         <Route path="/signup" element={<Signup />} />
         <Route path="/adminLogin" element={<AdminLogin />} />
+        <Route path="/savedRecipes" element={<SavedRecipes />} />
         <Route
           path="/adminRecipes"
           element={
