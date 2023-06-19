@@ -13,7 +13,7 @@ export const recipeData = (data) => (dispatch) => {
     // .get("https://thzv8b-8080.csb.app/recipes", data)
     .get(`${url}/recipe/`, data)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       dispatch({
         type: RECIPE_SUCCESS,
         payload: res.data.recipes,

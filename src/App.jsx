@@ -16,6 +16,7 @@ import { verifyToken } from "./Redux/Role/actionTypes";
 import { RecipePage } from "./Recipes/RecipePages/RecipePage";
 import { SingleRecipePage } from "./Recipes/RecipePages/SingleRecipePage";
 import SavedRecipes from "./Pages/SavedRecipes";
+import UserPrivateRoute from "./components/UserPrivateRoute";
 
 function App() {
   const storeAdmin = useSelector((store) => {
@@ -62,7 +63,14 @@ function App() {
         /> */}
         <Route path="/signup" element={<Signup />} />
         <Route path="/adminLogin" element={<AdminLogin />} />
-        <Route path="/savedRecipes" element={<SavedRecipes />} />
+        <Route
+          path="/savedRecipes"
+          element={
+            <UserPrivateRoute>
+              <SavedRecipes />
+            </UserPrivateRoute>
+          }
+        />
         <Route
           path="/adminRecipes"
           element={
