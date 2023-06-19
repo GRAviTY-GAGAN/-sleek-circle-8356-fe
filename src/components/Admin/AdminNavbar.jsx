@@ -24,7 +24,7 @@ import { useDispatch } from "react-redux";
 import { ADMIN_TYPE } from "../../Redux/Role/actionTypes";
 
 const Links = [
-  { name: "Home", path: "admin" },
+  // { name: "Home", path: "admin" },
   { name: "Recipes", path: "adminRecipes" },
 ];
 

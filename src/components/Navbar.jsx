@@ -15,21 +15,52 @@ import {
   useColorModeValue,
   Stack,
   Image,
+  useToast,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import RpLogo from "../assets/RpLogo.png";
+import userAvatar from "../assets/User-avatar.svg.webp";
+import avatar from "../assets/avatar.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { ADMIN_TYPE } from "../Redux/Role/actionTypes";
 
 const Links = [
   { name: "Home", path: "/" },
-  { name: "Login", path: "/login" },
-  { name: "Signup", path: "/signup" },
-  { name: "Course", path: "/course" },
-  { name: "User", path: "/user" },
+  { name: "Recipe", path: "/recipe" },
+  // { name: "Signup", path: "/signup" },
+  // { name: "Course", path: "/course" },
+  // { name: "User", path: "/user" },
 ];
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const adminReducer = useSelector((store) => store.adminReducer);
+  const dispatch = useDispatch();
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    navigate("/");
+    localStorage.setItem("token", "");
+    toast({
+      title: "Logged out.",
+      description: "User logged out successfully.",
+      status: "success",
+      duration: 6000,
+      isClosable: true,
+      position: "top",
+    });
+    dispatch({ type: ADMIN_TYPE, payload: false, role: "" });
+  }
+
+  function handleLogin() {
+    navigate("/login");
+  }
+
+  function handleSavedPage() {
+    navigate("/savedRecipes");
+  }
 
   return (
     <>
@@ -42,8 +73,8 @@ export default function Simple() {
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={8} alignItems={"center"}>
-            <Box w={"11rem"}>
+          <Flex w={"90%"} alignItems={"center"} justify={"space-between"}>
+            <Box w={"150px"}>
               <Image src={RpLogo} />
             </Box>
             <HStack
@@ -66,7 +97,7 @@ export default function Simple() {
                 </NavLink>
               ))}
             </HStack>
-          </HStack>
+          </Flex>
           <Flex alignItems={"center"}>
             <Menu>
               <MenuButton
@@ -77,28 +108,29 @@ export default function Simple() {
                 minW={0}
               >
                 <Avatar
-                  size={"sm"}
-                  src={
-                    "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                  }
+                  size={"md"}
+                  style={{
+                    border: adminReducer.role == "user" ? "" : "1px solid teal",
+                  }}
+                  src={adminReducer.role == "user" ? avatar : userAvatar}
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem onClick={handleSavedPage}>Saved Recipes</MenuItem>{" "}
+                {!adminReducer.admin && adminReducer.role == "user" ? (
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                ) : (
+                  <MenuItem onClick={handleLogin}>Login</MenuItem>
+                )}
+                {/* <MenuDivider />
+                <MenuItem>Link 3</MenuItem> */}
               </MenuList>
             </Menu>
           </Flex>
         </Flex>
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
-            <Stack
-              as={"nav"}
-              textAlign={"center"}
-              spacing={4}
-            >
+            <Stack as={"nav"} textAlign={"center"} spacing={4}>
               {Links.map((link) => (
                 <NavLink
                   style={({ isActive }) => ({

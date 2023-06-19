@@ -1,0 +1,36 @@
+.grid_card{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 90%;
+    margin: 1% auto;
+  }
+  .p_card{
+    text-align: left;
+    margin: 1% 0 0 5%;
+    font-size: 25px;
+    font-weight: 600;
+  }
+  @media screen and (min-width: 1451px) and (max-width: 1450px){
+    .grid_card {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+  }
+  @media screen and (min-width: 755px) and (max-width: 1200px) {
+    .grid_card {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+  }
+  @media screen and (max-width: 754px) {
+    .grid_card {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .main_cont{
+      text-align: center;
+    }
+  }

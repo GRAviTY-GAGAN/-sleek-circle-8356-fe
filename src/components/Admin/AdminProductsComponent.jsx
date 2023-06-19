@@ -8,14 +8,22 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import "./AdminProductsComponent.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ProductCard from "../../Recipes/RecipePages/ProductCard";
 import AdminProductCard from "./AdminProductCard";
-import { WarningTwoIcon } from "@chakra-ui/icons";
-import { useSearchParams } from "react-router-dom";
+import { CloseIcon, WarningTwoIcon } from "@chakra-ui/icons";
+import { useLocation, useSearchParams } from "react-router-dom";
 import AdminPagination from "./AdminPagination";
+import { useDispatch, useSelector } from "react-redux";
+import { COURSE_COUNT } from "../../Redux/Role/actionTypes";
+import { LOCATION_ACTION_TYPE } from "../../Redux/locationReducer/actionTypes";
 
-const AdminProductsComponent = ({ show }) => {
+const AdminProductsComponent = ({
+  show,
+  setShow,
+  searchString,
+  productAdded,
+}) => {
   const url =
     process.env.NODE_ENV == "development"
       ? import.meta.env.VITE_REACT_APP_LOCAL_URL
@@ -34,18 +42,32 @@ const AdminProductsComponent = ({ show }) => {
   );
   const [course, setCourse] = useState(searchParams.getAll("course") || []);
 
+  const dispatch = useDispatch();
+  const limitReq = useRef(0);
+  const location = useLocation();
+  // console.log(limitReq);
   // category.length > 0 ? (urlparams.category = category) : "";
 
   useEffect(() => {
+    dispatch({
+      type: LOCATION_ACTION_TYPE,
+      payload: location.pathname + location.search,
+    });
+    // console.log("LOCATION", locationstore);
     const urlparams = {
       category: category,
       course,
       page: pageNo,
     };
+
+    if (searchString) {
+      urlparams.title = searchParams;
+    }
+
     setSearchParams(urlparams);
     fetchProducts();
     // console.log(searchParams.get("page"));
-  }, [category, course, pageNo]);
+  }, [category, course, pageNo, searchString, productAdded]);
 
   function fetchProducts() {
     setloading(true);
@@ -55,12 +77,26 @@ const AdminProductsComponent = ({ show }) => {
           page: pageNo,
           category,
           course,
+          title: searchString,
         },
       })
       .then((res) => {
-        // console.log(res, "RECIPES");
+        console.log(res, "RECIPES");
+        if (res.data.recipes.length == 0 && limitReq.current < 3) {
+          limitReq.current = limitReq.current + 1;
+          setPageNo(1);
+        }
+        limitReq.current = 0;
         setRecipes(res.data.recipes);
         setRecipesCount(Math.ceil(res.data.recipesCount / 12));
+        dispatch({
+          type: COURSE_COUNT,
+          breakfastCount: res.data.breakfastCount,
+          lunchCount: res.data.lunchCount,
+          dinnerCount: res.data.dinnerCount,
+          startersCount: res.data.startersCount,
+          drinksCount: res.data.drinksCount,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -114,6 +150,14 @@ const AdminProductsComponent = ({ show }) => {
           }`}
         >
           <div>
+            <div
+              onClick={() => setShow(!show)}
+              className="AdminProductsComponent__SidebarCloseBTN"
+            >
+              <Flex justify={"flex-end"}>
+                <CloseIcon />
+              </Flex>
+            </div>
             <div className="AdminProductsComponent__FieldName zero">
               Category
             </div>
@@ -167,6 +211,24 @@ const AdminProductsComponent = ({ show }) => {
                 Dinner
               </Checkbox>
             </div>
+            <div>
+              <Checkbox
+                isChecked={course.includes("Starters")}
+                onChange={(e) => handleCourseChange(e)}
+                value="Starters"
+              >
+                Starters
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox
+                isChecked={course.includes("Drinks")}
+                onChange={(e) => handleCourseChange(e)}
+                value="Drinks"
+              >
+                Drinks
+              </Checkbox>
+            </div>
           </div>
           <div className="AdminProductsComponent__SidebarPagination">
             <div className="AdminProductsComponent__FieldName">Page</div>
@@ -175,7 +237,7 @@ const AdminProductsComponent = ({ show }) => {
                 name="prev"
                 onClick={(e) => handlePageChange(e.target.name)}
                 isDisabled={pageNo == 1}
-                backgroundColor={"green.400"}
+                backgroundColor={"#319795"}
                 color={"white"}
                 _hover={{
                   color: "black",
@@ -188,7 +250,7 @@ const AdminProductsComponent = ({ show }) => {
                 onClick={(e) => handlePageChange(e.target.name)}
                 name="next"
                 isDisabled={pageNo == recipesCount}
-                backgroundColor={"green.400"}
+                backgroundColor={"#319795"}
                 color={"white"}
                 _hover={{
                   color: "black",
@@ -232,6 +294,7 @@ const AdminProductsComponent = ({ show }) => {
               <div className="AdminProductsComponent__products">
                 {recipes.length > 0 &&
                   recipes.map((el, i) => {
+                    // console.log(el, "ELEMEN");
                     return <AdminProductCard key={el._id} {...el} />;
                   })}
               </div>

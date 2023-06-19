@@ -1,29 +1,32 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.breakfast_flex{
+
+.recipe_flex {
   width: 98%;
   margin: auto;
   display: flex;
-  justify-content: space-evenly; 
+  justify-content: space-evenly;
   /* border: 1px solid black; */
 }
-.breakfast_sidebar{
+
+.recipe_sidebar {
   width: 20%;
   margin: 40px 0px 0 0;
   padding-right: 30px;
   /* border-right: 1px solid gray; */
 }
-.breakfast_List{
+
+.recipe_List {
   width: 78%;
   margin-top: 40px;
   /* border: 1px solid black; */
 }
 
-.breakfast_image{
-/* background-image: url("https://www.npd.com/wp-content/uploads/2021/05/food-consumption-banner-1440x480.jpeg"); */
+.recipe_image {
+  /* background-image: url("https://www.npd.com/wp-content/uploads/2021/05/food-consumption-banner-1440x480.jpeg"); */
   background-repeat: no-repeat;
   background-size: 100% auto;
   width: 50%;
@@ -33,7 +36,8 @@
   border: 1px solid red;
   transition: all 1.4s ease 0s;
 }
-.banner{
+
+.banner {
   /* position: absolute; */
   width: 100%;
   height: 400px;
@@ -49,69 +53,88 @@
   position: relative;
   /* https://www.shutterstock.com/image-photo/assorted-indian-chicken-dishes-nonveg-260nw-2135259055.jpg */
 }
-@media screen and (min-width: 1451px) and (max-width: 1450px){
-.breakfast_sidebar{
-  width: 15%;
+
+@media screen and (min-width: 1451px) and (max-width: 1450px) {
+  .recipe_sidebar {
+    width: 15%;
+  }
+
+  .recipe_List {
+    width: 85%;
+  }
+
+  .recipe_grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
 }
-.breakfast_List{
-  width: 85%;
-}
-.breakfast_grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-}
-}
+
 @media screen and (min-width: 901px) and (max-width: 1450px) {
-.breakfast_sidebar{
-width: 20%;
+  .recipe_sidebar {
+    width: 20%;
+  }
+
+  .recipe_List {
+    width: 80%;
+  }
+
+  .recipe_grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
 }
-.breakfast_List{
-width: 80%;
-}
-.breakfast_grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 15px;
-}
-}
+
 @media screen and (min-width: 755px) and (max-width: 1075px) {
-.breakfast_sidebar{
-width: 30%;
+  .recipe_sidebar {
+    width: 30%;
+  }
+
+  .recipe_List {
+    width: 70%;
+  }
+
+  .recipe_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
 }
-.breakfast_List{
-width: 70%;
-}
-.breakfast_grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 15px;
-}
-}
+
 @media screen and (min-width: 515px) and (max-width: 754px) {
-.breakfast_sidebar{
-width: 50%;
+  .recipe_sidebar {
+    width: 50%;
+  }
+
+  .recipe_List {
+    width: 50%;
+  }
+
+  .recipe_grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
 }
-.breakfast_List{
-width: 50%;
-}
-.breakfast_grid {
-display: grid;
-grid-template-columns: repeat(1, 1fr);
-gap: 15px;
-}
-}
+
 @media screen and (max-width: 515px) {
-.breakfast_sidebar{
-display: none;
-}
-.breakfast_List{
-width: 60%;
-margin: 20px auto;
-}
-.breakfast_grid {
-display: grid;
-grid-template-columns: repeat(1, 1fr);
-gap: 15px;
-}
+  .recipe_sidebar {
+    display: none;
+  }
+
+  .banner {
+    height: 200px;
+  }
+
+  .recipe_List {
+    width: 80%;
+    margin: 20px auto;
+  }
+
+  .recipe_grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
 }

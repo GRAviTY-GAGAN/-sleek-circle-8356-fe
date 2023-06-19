@@ -58,7 +58,9 @@ export default function SimpleCard() {
           if (res.data.status == "success") {
             localStorage.setItem("token", res.data.token);
             dispatch(verifyToken()).then(() => {
-              navigate(location.state ? location.state : "/admin");
+              navigate(
+                location.state ? location.state : "/adminRecipes?page=1"
+              );
             });
           }
         })
@@ -144,10 +146,10 @@ export default function SimpleCard() {
                 <Link color={"blue.400"}>Forgot password?</Link>
               </Stack>
               <Button
-                bg={"green.500"}
+                bg={"#319795"}
                 color={"white"}
                 _hover={{
-                  bg: "green.600",
+                  bg: "#319795",
                 }}
                 onClick={handleAdminLogin}
               >

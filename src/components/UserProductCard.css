@@ -1,0 +1,16 @@
+.UserProductCard__delete {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border-radius: 50%;
+    color: white;
+    top: 8px;
+    right: 8px
+}
+
+.UserProductCard__mainCont:hover .UserProductCard__delete {
+    display: flex;
+}
