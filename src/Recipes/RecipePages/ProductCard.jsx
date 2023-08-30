@@ -29,7 +29,7 @@ function ProductCard({
   const toast = useToast();
 
   function handleSaveRecipe() {
-    setLiked(!liked)
+    setLiked(true)
     // console.log("SAveIF", _id);
     axios
       .post(
