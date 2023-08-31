@@ -41,6 +41,7 @@ import { Protein } from "../../DB/protein";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { DeleteIcon } from "@chakra-ui/icons";
+import Comment from "./Comment";
 
 const url =
   process.env.NODE_ENV == "development"
@@ -176,6 +177,8 @@ export const SingleRecipePage = () => {
       course,
       review,
       category,
+      likes,
+      comment,
       timeRequired,
     };
     axios
@@ -231,7 +234,7 @@ export const SingleRecipePage = () => {
   const fetchData = () => {
     getData(`${url}/recipe/signleRecipe/${id}`)
       .then((res) => {
-        // console.log(res, "ESULT")
+        console.log(res, "RESULT")
         setRecipe(res.recipe);
       })
       .catch((err) => {
@@ -430,6 +433,9 @@ export const SingleRecipePage = () => {
           </Stack>
         </SimpleGrid>
       </Container>
+      <div>
+        <Comment />
+      </div>
       <Container mt={"10"} maxW={"8xl"}>
         <GridContainer data={Protein} title={"High Protein Recipes"} />
       </Container>
