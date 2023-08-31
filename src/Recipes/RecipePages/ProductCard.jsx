@@ -1,10 +1,11 @@
-import { Box, Image, Badge, Text, Flex } from "@chakra-ui/react";
+import { Box, Image, Badge, Text, Flex, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { BiFoodTag } from "react-icons/bi";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function ProductCard({
   _id,
@@ -19,10 +20,53 @@ function ProductCard({
   recipe,
 }) {
   const [liked, setLiked] = useState(false);
-  // console.log("ID",_id)
+
+  const url =
+  process.env.NODE_ENV == "development"
+    ? import.meta.env.VITE_REACT_APP_LOCAL_URL
+    : import.meta.env.VITE_REACT_APP_PROD_URL;
+
+  const toast = useToast();
+
+  function handleSaveRecipe() {
+    setLiked(!liked)
+    // console.log("SAveIF", _id);
+    axios
+      .post(
+        `${url}/recipe/saveRecipe/${_id}`,{},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        toast({
+          title: res.statusText,
+          description: res.data.msg,
+          status: res.data.status,
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "Request failed",
+          description: "Something went wrong, try again!!",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
+        });
+      });
+  }
+
   return (
-    <Link to={`/recipe/${_id}`}>
       <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+        <Link to={`/recipe/${_id}`}>
         <Image
           src={image}
           alt={name}
@@ -31,7 +75,7 @@ function ProductCard({
           h={"300px"}
           cursor="pointer"
         />
-
+        </Link>
         <Box pt="2" pl="4" pr="4" pb="2">
           <Box
             display="flex"
@@ -99,7 +143,7 @@ function ProductCard({
               alignItems="center"
               justifyContent={"space-between"}
               cursor="pointer"
-              onClick={() => setLiked(!liked)}
+              onClick={handleSaveRecipe}
             >
               {liked ? (
                 <BsHeartFill fill="red" fontSize={"20px"} />
@@ -110,7 +154,6 @@ function ProductCard({
           </Box>
         </Box>
       </Box>
-    </Link>
   );
 }
 export default ProductCard;
