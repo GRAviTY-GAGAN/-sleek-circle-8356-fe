@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
+import { BsFillEyeFill } from "react-icons/bs";
 import { RxCheckbox } from "react-icons/rx";
 import { AiOutlineHeart } from "react-icons/ai";
 
@@ -259,21 +260,19 @@ export const SingleRecipePage = () => {
             {recipe?.name}
           </Heading>
           <Box display="flex" mt={"4"} fontSize={"1.2rem"}>
-            {recipe?.review} <FaRegThumbsUp style={{ margin: "2.8px" }} />{" "}
+            {recipe?.review} <BsFillEyeFill style={{ margin: "6px 5px" }} />{" "}
             Reviews | Prepare this delicious recipe in :{" "}
             {recipe?.timeRequired || recipe?.timeRequire}{" "}
             <IoTime style={{ margin: "6px 2px" }} />
           </Box>
-          <Box mt={"3"}>
-            <Text textTransform={"uppercase"}>
+          <Box mt={"1"}>
+            <Text textTransform={"uppercase"} textAlign={"left"} mb={2}>
               <span style={{ fontWeight: "700", textDecoration: "underline" }}>
                 COURSE:
               </span>{" "}
               {recipe?.course}
             </Text>
-          </Box>
-          <Box mt={"3"}>
-            <Text textTransform={"uppercase"}>
+            <Text textTransform={"uppercase"} textAlign={"left"} ml={0}>
               <span style={{ fontWeight: "700", textDecoration: "underline" }}>
                 CATEGORY:
               </span>{" "}
@@ -283,7 +282,7 @@ export const SingleRecipePage = () => {
           <br />
         </Box>
         {userType !== "admin" && (
-          <Flex align={"center"}>
+          <Flex align={"center"} mt={-6}>
             Liked the recipe? You can save this recipe&nbsp;&nbsp;
             <span style={{ fontSize: "30px" }}>👉</span>&nbsp;&nbsp;&nbsp;
             <Button onClick={handleSaveRecipe}>Save Recipe</Button>
@@ -304,7 +303,7 @@ export const SingleRecipePage = () => {
           </Flex>
         )}
 
-        <Text>
+        <Text textAlign={"left"} ml={0}>
           <i>
             This post may contain affiliate links. Read my
             <span
