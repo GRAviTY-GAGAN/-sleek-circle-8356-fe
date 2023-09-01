@@ -19,6 +19,7 @@ function UserProductCard({
   review,
   timeRequired,
   timeRequire,
+  likes,
   handleRemoveRecipe,
 }) {
   const [liked, setLiked] = useState(false);
@@ -115,24 +116,10 @@ function UserProductCard({
               </Flex>
               &nbsp;|&nbsp;
               <Flex justify={"center"} align={"center"}>
-                <Box>{review}</Box>{" "}
+                <Box>{likes.length}</Box>{" "}
                 <FaRegThumbsUp style={{ margin: "2.8px" }} />{" "}
               </Flex>
             </Box>
-            {/* <Flex
-            p={1}
-            mt={1}
-            alignItems="center"
-            justifyContent={"space-between"}
-            cursor="pointer"
-            onClick={() => setLiked(!liked)}
-          >
-            {liked ? (
-              <BsHeartFill fill="red" fontSize={"20px"} />
-            ) : (
-              <BsHeart fontSize={"20px"} />
-            )}
-          </Flex> */}
           </Box>
         </Box>
       </Box>

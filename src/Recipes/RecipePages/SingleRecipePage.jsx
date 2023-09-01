@@ -54,6 +54,8 @@ const getData = (url) => {
 };
 
 export const SingleRecipePage = () => {
+  let dataID;
+
   const AdminRecipes__ModalCloseBTN = document.querySelector(
     ".AdminRecipes__ModalCloseBTN"
   );
@@ -179,7 +181,7 @@ export const SingleRecipePage = () => {
       review,
       category,
       likes,
-      comment,
+      comments,
       timeRequired,
     };
     axios
@@ -236,6 +238,8 @@ export const SingleRecipePage = () => {
     getData(`${url}/recipe/signleRecipe/${id}`)
       .then((res) => {
         console.log(res, "RESULT")
+        dataID = res.recipe._id;
+        console.log(dataID);
         setRecipe(res.recipe);
       })
       .catch((err) => {
@@ -261,7 +265,7 @@ export const SingleRecipePage = () => {
           </Heading>
           <Box display="flex" mt={"4"} fontSize={"1.2rem"}>
             {recipe?.review} <BsFillEyeFill style={{ margin: "6px 5px" }} />{" "}
-            Reviews | Prepare this delicious recipe in :{" "}
+            views | Prepare this delicious recipe in :{" "}
             {recipe?.timeRequired || recipe?.timeRequire}{" "}
             <IoTime style={{ margin: "6px 2px" }} />
           </Box>
@@ -407,7 +411,7 @@ export const SingleRecipePage = () => {
                   <Box spacing={{ base: 4, sm: 6 }}>
                     <Text
                       fontSize={{ base: "16px", lg: "25px" }}
-                      color={useColorModeValue("gray.800", "gray.900")}
+                      color="gray.800"
                       fontWeight={"500"}
                       textAlign={"center"}
                       textDecoration={"underline"}
@@ -433,7 +437,7 @@ export const SingleRecipePage = () => {
         </SimpleGrid>
       </Container>
       <div>
-        <Comment />
+        <Comment id={dataID} />
       </div>
       <Container mt={"10"} maxW={"8xl"}>
         <GridContainer data={Protein} title={"High Protein Recipes"} />

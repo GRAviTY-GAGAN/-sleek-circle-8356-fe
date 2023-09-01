@@ -6,9 +6,13 @@
     /* border: 1px solid black; */
 }
 .box{
-    width: 25%;
+    width: 50%;
     margin: auto;
+    display: flex;
     border: 1px solid black;
+}
+.subbox1,.subbox2{
+    width: 50%;
 }
 .flex{
     width: 60%;
@@ -41,8 +45,18 @@
     color: white;
     background-color: rgb(255, 77, 77);
 }
-.commentBox{
+.commentSection{
     width: 100%;
     /* height: 300px; */
-    border-top: 1px solid black;
+    border: 1px solid black;
+}
+.commentBox{
+    width: 100%;
+    margin-top: 20px;
+    border: 1px solid black;
+}
+textarea{
+    padding: 10px;
+    margin: 5px auto 0 15px;
+    /* border: 1px solid black; */
 }
