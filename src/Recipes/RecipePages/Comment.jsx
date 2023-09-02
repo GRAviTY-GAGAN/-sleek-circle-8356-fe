@@ -7,11 +7,12 @@ import "./Comment.css";
 import reviewImage from "../../assets/reviews.png";
 import { Scrollbars } from 'react-custom-scrollbars-2';
 
-const Comment = ({id}) => {
-  const [text, setText] = useState();
+const Comment = ({id,comments}) => {
+  const [text, setText] = useState("");
   const toast = useToast();
+  console.log(comments)
 
-  // console.log(id)
+  // console.log("14",id)
 
   const size = "50px";
   const color = "teal";
@@ -30,10 +31,10 @@ const Comment = ({id}) => {
 	`;
 
   const handleComment = () => {
-    const payload = {text};
+    const payload = {comment: text};
     console.log(payload)
-    fetch(`http://localhost:8080/recipe/comments/${_id}`,{
-      method: "POST",
+    fetch(`https://recipefit-o1qb.onrender.com/recipe/comments/${id}`,{
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -42,22 +43,23 @@ const Comment = ({id}) => {
     })
     .then((res)=> res.json())
     .then((data)=> {
-      toast({
-        title: res.msg,
-        duration: 3000,
-        isClosable: true,
-        position: "top-right",
-      });
+      // toast({
+      //   title: res.msg,
+      //   duration: 3000,
+      //   isClosable: true,
+      //   position: "top-right",
+      // });
       console.log(data)
     })
     .catch((err)=> {
-      toast({
-        title: "Something went wrong, try again!!",
-        status: "error",
-        duration: 4000,
-        isClosable: true,
-        position: "top-right",
-      });
+      // toast({
+      //   title: "Something went wrong, try again!!",
+      //   status: "error",
+      //   duration: 4000,
+      //   isClosable: true,
+      //   position: "top-right",
+      // });
+      console.log(err)
     })
   }
 
@@ -123,7 +125,7 @@ const Comment = ({id}) => {
               />
             </Box>
               <div style={{marginTop: "3px"}}>
-                <p style={{fontWeight: "600", fontSize: "1rem", textDecoration: "underline", marginLeft: "15px"}}>Antony Gonzalvis</p>
+                <p style={{fontWeight: "600", fontSize: "1rem", textDecoration: "underline", marginLeft: "15px"}}></p>
                 <div className="flex2">
                 <GrStar fontSize="15px" style={{ margin: "auto", color: "gold" }} />
                 <GrStar fontSize="15px" style={{ margin: "auto", color: "gold" }} />
@@ -234,7 +236,7 @@ const Comment = ({id}) => {
               />
             </Box>
               <div style={{marginTop: "3px"}}>
-                <p style={{fontWeight: "600", fontSize: "1rem", textDecoration: "underline", marginLeft: "15px"}}>Antony Gonzalvis</p>
+                <p style={{fontWeight: "600", fontSize: "1rem", textDecoration: "underline", marginLeft: "15px"}}>{comments?.userName}</p>
                 <div className="flex2">
                 <GrStar fontSize="15px" style={{ margin: "auto", color: "gold" }} />
                 <GrStar fontSize="15px" style={{ margin: "auto", color: "gold" }} />

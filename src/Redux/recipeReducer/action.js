@@ -14,9 +14,15 @@ export const recipeData = (data) => (dispatch) => {
     .get(`${url}/recipe/`, data)
     .then((res) => {
       // console.log(res);
+      let arr = res.data.recipes
+      let temp = []
+      for(let i=0; i<arr.length; i++){
+        temp.push({...arr[i], likesLength:arr[i].likes?.length});
+      }
+
       dispatch({
         type: RECIPE_SUCCESS,
-        payload: res.data.recipes,
+        payload: temp,
         totalrecipe: res.data.recipesCount,
       });
     })

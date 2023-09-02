@@ -103,7 +103,7 @@ export const RecipeList = () => {
           <div className="grid">
             {recipes.length > 0 &&
               recipes.map((el, i) => {
-                return <ProductCard key={el._id} {...el} recipe={recipes} />;
+                return <ProductCard key={el._id} {...el} recipe={recipes} index={i} />;
               })}
           </div>
         </div>

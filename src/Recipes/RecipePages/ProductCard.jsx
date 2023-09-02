@@ -6,6 +6,8 @@ import { IoTime } from "react-icons/io5";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { RECIPE_SUCCESS } from "../../Redux/recipeReducer/actionType";
 
 function ProductCard({
   _id,
@@ -20,8 +22,13 @@ function ProductCard({
   likes,
   comment,
   recipe,
+  index
 }) {
   const [liked, setLiked] = useState(false);
+  
+  const previousRecipe = useSelector((store) => store.recipeReducer.recipes);
+  const totalrecipe = useSelector((store) => store.recipeReducer.totalrecipe);
+  const dispatch = useDispatch();
 
   const url =
     process.env.NODE_ENV == "development"
@@ -68,19 +75,27 @@ function ProductCard({
   }
 
   const likePost = (id) => {
-    fetch(`http://localhost:8080/recipe/like/${_id}`, {
+    fetch(`${url}/recipe/like/${_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        postID: id,
+        postID: id,       
       }),
     })
       .then((res) => res.json())
       .then((result) => {
           console.log(result)
+          // let previous = [...previousRecipe];
+          // previous[index].likesLength = recipe?.likesLength+1 
+          
+          // dispatch({
+          //   type: RECIPE_SUCCESS,
+          //   payload: [...previous],
+          //   totalrecipe: totalrecipe,
+          // });
       })
       .catch((err) => {
         console.log(err);
@@ -157,7 +172,7 @@ function ProductCard({
               onClick={() => {
                 likePost(_id);
               }}
-              style={{ margin: "2.8px" }}
+              style={{ margin: "2.8px", cursor: "pointer", color: "green" }}
             />{" "}
             | {timeRequired || timeRequire}{" "}
             <IoTime style={{ margin: "6px 2px" }} />
