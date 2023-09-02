@@ -54,7 +54,9 @@ const getData = (url) => {
 };
 
 export const SingleRecipePage = () => {
-  let dataID;
+  const [dataID, setDataID] = useState("");
+  const [data, setData] = useState([]);
+  console.log(data)
 
   const AdminRecipes__ModalCloseBTN = document.querySelector(
     ".AdminRecipes__ModalCloseBTN"
@@ -238,14 +240,15 @@ export const SingleRecipePage = () => {
     getData(`${url}/recipe/signleRecipe/${id}`)
       .then((res) => {
         console.log(res, "RESULT")
-        dataID = res.recipe._id;
-        console.log(dataID);
+        setData(res.data)
+        setDataID(res.recipe._id)
         setRecipe(res.recipe);
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+    };
+    // console.log(dataID);
 
   useEffect(() => {
     fetchData();
@@ -437,7 +440,7 @@ export const SingleRecipePage = () => {
         </SimpleGrid>
       </Container>
       <div>
-        <Comment id={dataID} />
+        <Comment id={dataID} comments={data} />
       </div>
       <Container mt={"10"} maxW={"8xl"}>
         <GridContainer data={Protein} title={"High Protein Recipes"} />
