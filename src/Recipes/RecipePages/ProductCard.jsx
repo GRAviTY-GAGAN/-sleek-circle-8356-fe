@@ -7,7 +7,7 @@ import { BsHeartFill, BsHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { RECIPE_SUCCESS } from "../../Redux/recipeReducer/actionType";
+// import { RECIPE_SUCCESS } from "../../Redux/recipeReducer/actionType";
 
 function ProductCard({
   _id,
@@ -24,7 +24,10 @@ function ProductCard({
   recipe,
   index
 }) {
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(likes.includes(_id));
+  const [Like,setLike]=useState(likes.length);
+  const [visible, setVisible] = useState(false);
+  const [data, setData] = useState({});
   
   const previousRecipe = useSelector((store) => store.recipeReducer.recipes);
   const totalrecipe = useSelector((store) => store.recipeReducer.totalrecipe);
@@ -74,33 +77,64 @@ function ProductCard({
       });
   }
 
-  const likePost = (id) => {
-    fetch(`${url}/recipe/like/${_id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({
-        postID: id,       
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-          console.log(result)
-          // let previous = [...previousRecipe];
-          // previous[index].likesLength = recipe?.likesLength+1 
+  // const likePost = (id) => {
+  //   fetch(`${url}/recipe/like/${_id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //     body: JSON.stringify({
+  //       postID: id,       
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //         console.log(result)
+  //         // let previous = [...previousRecipe];
+  //         // previous[index].likesLength = recipe?.likesLength+1 
           
-          // dispatch({
-          //   type: RECIPE_SUCCESS,
-          //   payload: [...previous],
-          //   totalrecipe: totalrecipe,
-          // });
+  //         // dispatch({
+  //         //   type: RECIPE_SUCCESS,
+  //         //   payload: [...previous],
+  //         //   totalrecipe: totalrecipe,
+  //         // });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  const likePost = (_id) => {
+    if(liked){
+      setLike((pre)=>pre-1)
+      setLiked(!liked);
+      setVisible((visible)=> !visible)
+    }else{
+      setLike((pre)=>pre+1)
+      setLiked(!liked);
+    }
+   
+    console.log("inside liking fun");
+    const token = localStorage.getItem("token");
+    console.log(_id, "token", token);
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    axios
+      .patch(`${url}/recipe/like/${_id}`, {}, { headers })
+      .then((response) => {
+        console.log("Like response:", response.data);
+        setData({ ...response.data.updatedRecipe });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.error("Error while liking:", error);
       });
   };
+
+  useEffect(()=> {
+    // console.log(likes)
+  },[data,Like])
 
   return (
     <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -167,7 +201,7 @@ function ProductCard({
           justifyContent="space-between"
         >
           <Box display="flex">
-            {likes.length}{" "}
+            {Like}{" "}
             <FaRegThumbsUp
               onClick={() => {
                 likePost(_id);
