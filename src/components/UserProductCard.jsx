@@ -1,7 +1,7 @@
 import { Box, Image, Badge, Text, Flex } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BiFoodTag } from "react-icons/bi";
-import { FaRegThumbsUp } from "react-icons/fa";
+import { FaThumbsUp } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -22,12 +22,44 @@ function UserProductCard({
   likes,
   handleRemoveRecipe,
 }) {
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(likes.includes(_id));
+  const [Like,setLike]=useState(likes.length);
+  const [data, setData] = useState({});
 
   const url =
     process.env.NODE_ENV == "development"
       ? import.meta.env.VITE_REACT_APP_LOCAL_URL
       : import.meta.env.VITE_REACT_APP_PROD_URL;
+
+      const likePost = (_id) => {
+        if(liked){
+          setLike((pre)=>pre-1)
+          setLiked(!liked);
+        }else{
+          setLike((pre)=>pre+1)
+          setLiked(!liked);
+        }
+       
+        console.log("inside liking fun");
+        const token = localStorage.getItem("token");
+        console.log(_id, "token", token);
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+        axios
+          .patch(`${url}/recipe/like/${_id}`, {}, { headers })
+          .then((response) => {
+            console.log("Like response:", response.data);
+            setData({ ...response.data.updatedRecipe });
+          })
+          .catch((error) => {
+            console.error("Error while liking:", error);
+          });
+      };
+    
+      useEffect(()=> {
+        // console.log(likes)
+      },[data,Like])
 
   return (
     <>
@@ -116,8 +148,13 @@ function UserProductCard({
               </Flex>
               &nbsp;|&nbsp;
               <Flex justify={"center"} align={"center"}>
-                <Box>{likes.length}</Box>{" "}
-                <FaRegThumbsUp style={{ margin: "2.8px" }} />{" "}
+                <Box>{Like}</Box>{" "}
+                <FaThumbsUp
+                  onClick={() => {
+                likePost(_id);
+              }}
+              style={{ margin: "2.8px", cursor: "pointer", color: "green" }}
+            />
               </Flex>
             </Box>
           </Box>
