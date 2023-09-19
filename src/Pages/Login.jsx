@@ -52,6 +52,7 @@ export default function Login() {
 
           if (res.data.status === "success") {
             localStorage.setItem("token", res.data.token);
+            localStorage.setItem("nameOfUser", res.data.nameOfUser);
             dispatch({ type: ADMIN_TYPE, payload: false, role: "user" });
             setTimeout(() => {
               navigate("/");

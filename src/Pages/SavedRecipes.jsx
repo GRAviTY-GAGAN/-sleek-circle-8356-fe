@@ -4,6 +4,7 @@ import axios from "axios";
 import AdminProductCard from "../components/Admin/AdminProductCard";
 import { Box, useToast } from "@chakra-ui/react";
 import UserProductCard from "../components/UserProductCard";
+import NoRecipeFound from "./NoRecipeFound";
 
 const SavedRecipes = () => {
   const url =
@@ -73,13 +74,13 @@ const SavedRecipes = () => {
   return (
     <div className="savedRecipes__mainCont">
       <Box className="savedRecipes__products">
-        {recipes.map((recipe) => (
+        {recipes.length > 0 ? recipes?.map((recipe) => (
           <UserProductCard
             key={recipe._id}
             handleRemoveRecipe={handleRemoveRecipe}
             {...recipe}
           />
-        ))}
+        )) : (<NoRecipeFound />)}
       </Box>
     </div>
   );

@@ -17,6 +17,7 @@ import { RecipePage } from "./Recipes/RecipePages/RecipePage";
 import { SingleRecipePage } from "./Recipes/RecipePages/SingleRecipePage";
 import SavedRecipes from "./Pages/SavedRecipes";
 import UserPrivateRoute from "./components/UserPrivateRoute";
+import PageNotFound from "./Pages/PageNotFound";
 
 function App() {
   const storeAdmin = useSelector((store) => {
@@ -53,14 +54,14 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
-        {/* <Route
+        <Route
           path="/admin"
           element={
             <AdminPrivateRoute>
               <Admin />
             </AdminPrivateRoute>
           }
-        /> */}
+        />
         <Route path="/signup" element={<Signup />} />
         <Route path="/adminLogin" element={<AdminLogin />} />
         <Route
@@ -81,6 +82,7 @@ function App() {
         />
         <Route path="/recipe/" element={<RecipePage />} />
         <Route path="/recipe/:id" element={<SingleRecipePage />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </>
