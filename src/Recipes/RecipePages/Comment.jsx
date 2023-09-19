@@ -133,7 +133,7 @@ const Comment = ({ id, comments, getComment }) => {
           >
             Comments
           </p>
-          <Scrollbars style={{ width: "100%", height: 270 }}>
+          <Scrollbars style={{ width: "100%", height: 270, border: "1px solid black" }}>
             {allComments?.length > 0 ? (
               allComments?.map((el, i) => (
                 <div
@@ -216,8 +216,10 @@ const Comment = ({ id, comments, getComment }) => {
                       className="p"
                       style={{
                         textAlign: "justify",
-                        padding: "0px 8px",
+                        padding: "0px 5px",
                         marginTop: "-5px",
+                        border: "1px solid black",
+                        borderRadius: "3px"
                       }}
                     >
                       {el.comment}
@@ -227,7 +229,7 @@ const Comment = ({ id, comments, getComment }) => {
                         width: "50%",
                         display: "flex",
                         alignItems: "center",
-                        margin: "-3px 0 10px 21px",
+                        margin: "-3px 0 10px 15px",
                       }}
                     >
                       <FaThumbsUp fontSize="16px" style={{ color: "green" }} />

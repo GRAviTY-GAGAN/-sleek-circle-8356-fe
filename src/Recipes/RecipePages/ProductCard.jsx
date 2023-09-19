@@ -41,7 +41,7 @@ function ProductCard({
   const toast = useToast();
 
   function handleSaveRecipe() {
-    setLiked(true);
+    setVisible(true);
     // console.log("SAveIF", _id);
     axios
       .post(
@@ -109,7 +109,6 @@ function ProductCard({
     if(liked){
       setLike((pre)=>pre-1)
       setLiked(!liked);
-      setVisible((visible)=> !visible)
     }else{
       setLike((pre)=>pre+1)
       setLiked(!liked);
@@ -220,7 +219,7 @@ function ProductCard({
             cursor="pointer"
             onClick={handleSaveRecipe}
           >
-            {liked ? (
+            {visible ? (
               <BsHeartFill fill="red" fontSize={"20px"} />
             ) : (
               <BsHeart fontSize={"20px"} />
