@@ -16,7 +16,7 @@ const UserPrivateRoute = ({ children }) => {
   if (role == "user") {
     return <div>{children}</div>;
   } else {
-    return <Navigate to={"/login"} />;
+    return <Navigate state={location.pathname} to={"/login"} />;
   }
 };
 

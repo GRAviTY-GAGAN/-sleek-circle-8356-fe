@@ -4,7 +4,7 @@ import { BiFoodTag } from "react-icons/bi";
 import { FaThumbsUp } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DeleteIcon } from "@chakra-ui/icons";
 import "./UserProductCard.css";
 import axios from "axios";
@@ -25,6 +25,7 @@ function UserProductCard({
   const [liked, setLiked] = useState(likes.includes(_id));
   const [Like,setLike]=useState(likes.length);
   const [data, setData] = useState({});
+  const navigate = useNavigate();
 
   const url =
     process.env.NODE_ENV == "development"
@@ -32,28 +33,24 @@ function UserProductCard({
       : import.meta.env.VITE_REACT_APP_PROD_URL;
 
       const likePost = (_id) => {
-        if(liked){
-          setLike((pre)=>pre-1)
-          setLiked(!liked);
-        }else{
-          setLike((pre)=>pre+1)
-          setLiked(!liked);
-        }
-       
-        console.log("inside liking fun");
+        let id = { _id }
         const token = localStorage.getItem("token");
-        console.log(_id, "token", token);
+        if(!token){
+          navigate("/login")
+        }
         const headers = {
           Authorization: `Bearer ${token}`,
         };
+    
         axios
-          .patch(`${url}/recipe/like/${_id}`, {}, { headers })
-          .then((response) => {
-            console.log("Like response:", response.data);
-            setData({ ...response.data.updatedRecipe });
+          .patch(`${url}/recipe/like/${_id}`, id, { headers })
+          .then((res) => {
+            console.log(res.data)
+            setData({...res.data.updatedRecipe})
+            setLike(res.data.updatedRecipe.likes.length)
           })
           .catch((error) => {
-            console.error("Error while liking:", error);
+            console.error(error);
           });
       };
     

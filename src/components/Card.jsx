@@ -13,6 +13,8 @@ function Card({
   description,
   review,
   timeRequired,
+  timeRequire,
+  likes
 }) {
   const [liked, setLiked] = useState(false);
 
@@ -89,7 +91,7 @@ function Card({
         >
           <Box display="flex">
             {review} <FaRegThumbsUp style={{ margin: "2.8px" }} /> |{" "}
-            {timeRequired} <IoTime style={{ margin: "6px 2px" }} />
+            {timeRequired ? timeRequired : timeRequire} <IoTime style={{ margin: "6px 2px" }} />
           </Box>
           <Flex
             p={1}

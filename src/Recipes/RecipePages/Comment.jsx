@@ -15,6 +15,7 @@ import "./Comment.css";
 import reviewImage from "../../assets/reviews.png";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const url =
   process.env.NODE_ENV == "development"
@@ -24,8 +25,9 @@ const url =
 const Comment = ({ id, comments, getComment }) => {
   const [text, setText] = useState("");
   const toast = useToast();
+  const navigate = useNavigate();
   const UserName = localStorage.getItem("nameOfUser");
-  let allComments = [...comments].reverse()
+  let allComments = [...comments].reverse();
 
   // console.log("14",id)
 
@@ -83,6 +85,9 @@ const Comment = ({ id, comments, getComment }) => {
       comment: text,
     };
     const token = localStorage.getItem("token");
+    if(!token){
+      navigate("/login")
+    }
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -97,7 +102,7 @@ const Comment = ({ id, comments, getComment }) => {
         console.error(error);
       });
   };
-    console.log("comments", comments);
+    // console.log("comments", comments);
 
   return (
     <div className="container">

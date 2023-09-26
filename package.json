@@ -36,6 +36,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "slick-carousel": "^1.8.1",
+    "vercel": "^32.2.5",
     "yallist": "^4.0.0"
   },
   "devDependencies": {

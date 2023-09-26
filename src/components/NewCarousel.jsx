@@ -13,10 +13,10 @@ const settings = {
   arrows: false,
   //   fade: true,
   infinite: true,
-  //   autoplay: true,
+  autoplay: true,
   speed: 500,
   autoplaySpeed: 5000,
-  slidesToShow: 3,
+  slidesToShow: 4,
   slidesToScroll: 1,
 };
 
