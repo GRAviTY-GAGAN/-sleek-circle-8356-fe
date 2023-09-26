@@ -14,7 +14,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ADMIN_TYPE } from "../Redux/Role/actionTypes";
@@ -71,6 +71,7 @@ export default function Login() {
       });
     }
   };
+  
 
   return (
     <Flex

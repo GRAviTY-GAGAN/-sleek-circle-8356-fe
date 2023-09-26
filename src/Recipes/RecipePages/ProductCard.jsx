@@ -4,7 +4,7 @@ import { BiFoodTag } from "react-icons/bi";
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 // import { RECIPE_SUCCESS } from "../../Redux/recipeReducer/actionType";
@@ -20,15 +20,14 @@ function ProductCard({
   timeRequired,
   timeRequire,
   likes,
-  comment,
-  recipe,
-  index
 }) {
-  const [liked, setLiked] = useState(likes.includes(_id));
-  const [Like,setLike]=useState(likes.length);
+  const [liked, setLiked] = useState(false);
+  const [Like, setLike] = useState(likes.length);
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState({});
-  
+  const navigate = useNavigate();
+  const likeData = [...likes]
+
   const previousRecipe = useSelector((store) => store.recipeReducer.recipes);
   const totalrecipe = useSelector((store) => store.recipeReducer.totalrecipe);
   const dispatch = useDispatch();
@@ -77,63 +76,32 @@ function ProductCard({
       });
   }
 
-  // const likePost = (id) => {
-  //   fetch(`${url}/recipe/like/${_id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //     body: JSON.stringify({
-  //       postID: id,       
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //         console.log(result)
-  //         // let previous = [...previousRecipe];
-  //         // previous[index].likesLength = recipe?.likesLength+1 
-          
-  //         // dispatch({
-  //         //   type: RECIPE_SUCCESS,
-  //         //   payload: [...previous],
-  //         //   totalrecipe: totalrecipe,
-  //         // });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   const likePost = (_id) => {
-    if(liked){
-      setLike((pre)=>pre-1)
-      setLiked(!liked);
-    }else{
-      setLike((pre)=>pre+1)
-      setLiked(!liked);
-    }
-   
-    console.log("inside liking fun");
+    let id = { _id };
     const token = localStorage.getItem("token");
-    console.log(_id, "token", token);
+    if (!token) {
+      navigate("/login");
+    }
     const headers = {
       Authorization: `Bearer ${token}`,
     };
+
     axios
-      .patch(`${url}/recipe/like/${_id}`, {}, { headers })
-      .then((response) => {
-        console.log("Like response:", response.data);
-        setData({ ...response.data.updatedRecipe });
+      .patch(`${url}/recipe/like/${_id}`, id, { headers })
+      .then((res) => {
+        console.log(res.data);
+        setData({ ...res.data.updatedRecipe });
+        setLike(res.data.updatedRecipe.likes.length);
       })
       .catch((error) => {
-        console.error("Error while liking:", error);
+        console.error(error);
       });
   };
 
-  useEffect(()=> {
+
+  useEffect(() => {
     // console.log(likes)
-  },[data,Like])
+  }, [data, Like]);
 
   return (
     <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -202,11 +170,11 @@ function ProductCard({
           <Box display="flex">
             {Like}{" "}
             <FaRegThumbsUp
-              onClick={() => {
-                likePost(_id);
-              }}
-              style={{ margin: "2.8px", cursor: "pointer", color: "green" }}
-            />{" "}
+                onClick={() => {
+                  likePost(_id);
+                }}
+                style={{ margin: "2.8px", cursor: "pointer", color: "green" }}
+              />{" "}
             | {timeRequired || timeRequire}{" "}
             <IoTime style={{ margin: "6px 2px" }} />
           </Box>

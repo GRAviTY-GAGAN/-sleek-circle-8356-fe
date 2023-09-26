@@ -36,7 +36,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { GridContainer } from "./GridContainer";
 import { Protein } from "../../DB/protein";
 import { useSelector } from "react-redux";
